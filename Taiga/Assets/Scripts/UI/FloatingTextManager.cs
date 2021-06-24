@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FloatingTextManager : MonoBehaviour
 {
 
-    public GameObject textContainer, textPrefab;
+    public GameObject textPrefab;
 
     private List<FloatingText> floatingTexts = new List<FloatingText>();
 
@@ -33,10 +33,10 @@ public class FloatingTextManager : MonoBehaviour
 
         FloatingText text = floatingTexts.Find(t => !t.active);
 
-        if(text != null){
+        if(text == null){
             text = new FloatingText();
             text.go = Instantiate(textPrefab);
-            text.go.transform.SetParent(textContainer.transform);
+            text.go.transform.SetParent(transform);
             text.thisText = text.go.GetComponent<Text>();
 
             floatingTexts.Add(text);

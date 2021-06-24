@@ -34,12 +34,12 @@ public class FloatingText
     public void UpdateFloatingText(){
         if (!active) return;
 
+        //FloatingText object stays in worldspace, regardless of camera movement
+        go.transform.position += (currentCamera.WorldToScreenPoint(cameraZeroPos) - currentCamera.transform.position) + motion * Time.deltaTime;
+        cameraZeroPos = currentCamera.ScreenToWorldPoint(currentCamera.transform.position);
+
         if(Time.time - lastShown > duration){
             Hide();
         }
-
-        //FloatingText object stays in worldspace, regardless of camera movement
-        go.transform.position += (cameraZeroPos - currentCamera.ScreenToWorldPoint(currentCamera.transform.position)) + motion * Time.deltaTime;
-        cameraZeroPos = currentCamera.ScreenToWorldPoint(currentCamera.transform.position);
     }
 }

@@ -10,18 +10,30 @@ public class GameController : MonoBehaviour
     public Chapter currentChapter;
     public Player activePlayer;
     public GameObject playerPrefab;
-    public static GameController Instance { get { return _instance; } }
-    public bool IsPaused { get { return _isPaused; } }
     public bool debugging;
-    SpawnLocation levelSpawnLocation;
+    public static GameController Instance
+    {
+        get { return _instance; }
+    }
+    public CameraController GetCameraController
+    {
+        get { return cameraController; }
+    }
+    public bool IsPaused
+    {
+        get { return _isPaused; }
+    }
+
 
     float currentTimeScale = 1, roomTransitionDelay = 4f;
-    UiController ui;
-    public CameraController GetCameraController { get { return cameraController; } }
-    CameraController cameraController;
-    AstarGrid grid;
-    static GameController _instance;
     bool _isPaused;
+    static GameController _instance;
+    UiController ui;
+    SpawnLocation levelSpawnLocation;
+    CameraController cameraController;
+    FloatingTextManager floatingTextManager;
+    AstarGrid grid;
+
 
     //Debugging
     ScreenLogger screenLogger;
@@ -41,7 +53,15 @@ public class GameController : MonoBehaviour
         Random.InitState(System.DateTime.Now.Millisecond);
 
         if (!grid) { grid = GetComponentInChildren<AstarGrid>(); }
-        if (!ui) { ui = GetComponentInChildren<UiController>(); }
+        if (!ui) 
+        { 
+            ui = GetComponentInChildren<UiController>(); 
+            if(!floatingTextManager){
+                floatingTextManager = ui.gameObject.GetComponentInChildren<FloatingTextManager>();
+                if (!floatingTextManager) { Debug.Log("No FloatingTextManager found..."); }
+            }
+        }
+
         if (!screenLogger) { screenLogger = GetComponentInChildren<ScreenLogger>(); }
         if (!cameraController) { cameraController = GetComponentInChildren<CameraController>(); }
 
@@ -53,13 +73,16 @@ public class GameController : MonoBehaviour
         Debug.Log("Found " + sceneRooms.Length + " rooms, calling setup...");
 
         levelSpawnLocation = null;
-        for (int i = 0; i < sceneRooms.Length;i++){
+        for (int i = 0; i < sceneRooms.Length; i++)
+        {
             if (sceneRooms[i].isDefaultRoom) { levelSpawnLocation = sceneRooms[i].GetComponentInChildren<SpawnLocation>(); }
             sceneRooms[i].Setup();
         }
-        if(!levelSpawnLocation){
+        if (!levelSpawnLocation)
+        {
             levelSpawnLocation = FindObjectOfType<SpawnLocation>();
-            if (!levelSpawnLocation) { 
+            if (!levelSpawnLocation)
+            {
                 Debug.Log("WARNING: No active spawn location in scene, defaulting to bottom left corner.");
             }
         }
@@ -68,7 +91,8 @@ public class GameController : MonoBehaviour
         cameraController.target = activePlayer.gameObject;
 
         //DEBUGGING
-        if(!debugging){
+        if (!debugging)
+        {
             if (!activePlayer)
             {
                 activePlayer = FindObjectOfType<Player>();
@@ -82,9 +106,12 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Pause key pressed!");
-            if(IsPaused){
+            if (IsPaused)
+            {
                 Resume();
-            }else{
+            }
+            else
+            {
                 Pause();
 
             }
@@ -100,28 +127,33 @@ public class GameController : MonoBehaviour
             }
         }
     }
-#region game time related
-    public void Pause(){
+
+    #region game time related
+    public void Pause()
+    {
 
         currentTimeScale = Time.timeScale;
         Time.timeScale = 0;
         _isPaused = true;
     }
 
-    public void Resume(){
+    public void Resume()
+    {
         Time.timeScale = currentTimeScale;
         _isPaused = false;
     }
-#endregion
+    #endregion
 
-    public void ChangeLevel(){
+    public void ChangeLevel()
+    {
         //TODO: Transition to level stated in transition variable. Do level exit stuff (save and clear memory).
         activePlayer.gameObject.SetActive(false);
         Debug.Log("Changing level...");
     }
 
     //Changes the current chapter of the game, and scene. Enables the Chapter in the active Room.
-    public void SetChapter(Chapter chapter){
+    public void SetChapter(Chapter chapter)
+    {
         currentChapter = chapter;
 
         Room[] sceneRooms = FindObjectsOfType<Room>();
@@ -134,11 +166,15 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void InstantiatePlayer(){
+    public void InstantiatePlayer()
+    {
         Vector2 spawnLocation = new Vector2();
-        if(!levelSpawnLocation){
+        if (!levelSpawnLocation)
+        {
             spawnLocation = transform.position;
-        }else{
+        }
+        else
+        {
             spawnLocation = levelSpawnLocation.transform.position;
         }
 
@@ -149,17 +185,21 @@ public class GameController : MonoBehaviour
 
     }
 
-    public void LinkPlayer(Player player){
+    public void LinkPlayer(Player player)
+    {
         activePlayer = player;
         SetupPlayer();
     }
 
-    void SetupPlayer(){
-        
+    void SetupPlayer()
+    {
+
     }
 
-    public void ActivateRoom(Room activeRoom, BoxCollider2D roomCollider){
-        if(grid){
+    public void ActivateRoom(Room activeRoom, BoxCollider2D roomCollider)
+    {
+        if (grid)
+        {
             cameraController.SetBoundaries(roomCollider);
             Vector2 pos = roomCollider.offset;
             grid.transform.position = pos;
@@ -171,17 +211,20 @@ public class GameController : MonoBehaviour
         activeRoom.EnableChapters();
     }
 
-    public void DisableRoom(Room activeRoom){
+    public void DisableRoom(Room activeRoom)
+    {
 
         Debug.Log("Disabling Room: " + activeRoom.name);
         activeRoom.DisableChapters();
     }
 
-    public void TransitionPlayer(RoomTransition transition, bool levelTransition){
-            StartCoroutine(TransitionDelay(transition));
+    public void TransitionPlayer(RoomTransition transition, bool levelTransition)
+    {
+        StartCoroutine(TransitionDelay(transition));
     }
 
-    IEnumerator TransitionDelay(RoomTransition transition){
+    IEnumerator TransitionDelay(RoomTransition transition)
+    {
         //Black out the screen here
         Debug.Log("Transition is to new level: " + transition.isLevelTransition);
         Pause();
@@ -192,7 +235,8 @@ public class GameController : MonoBehaviour
         Resume();
         //Moves player to transition point if not levelTransition
         if (!transition.isLevelTransition) { transition.Transition(); }
-        else {
+        else
+        {
             ChangeLevel();
             yield break;
         }
@@ -209,5 +253,10 @@ public class GameController : MonoBehaviour
         if (transition.isLevelTransition) { ChangeLevel(); }
     }
 
+    #region floating text related
+    public void ShowFloatingText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration){
+        floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
+    }
+    #endregion
 }
 
