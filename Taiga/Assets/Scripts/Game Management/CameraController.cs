@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 
     public GameObject target;
     BoxCollider2D roomBoundaries;
-    Camera mainCamera;
+    public Camera mainCamera;
 
     public void Initiate(){
         mainCamera = GetComponent<Camera>();

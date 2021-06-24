@@ -1,2 +1,3 @@
 ﻿Giuseppe Portelli, www.aclockworkberry.com (Unity Screen Logger, Screen Resolution advice)
 James Taft, @TaftCreates (Tutorial on a top down 2D adventure game)
+Michael Doyon, @N3K_Michael (FloatingText, tutorial on 2D adventure game)

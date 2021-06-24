@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
 
     float currentTimeScale = 1, roomTransitionDelay = 4f;
     UiController ui;
+    public CameraController GetCameraController { get { return cameraController; } }
     CameraController cameraController;
     AstarGrid grid;
     static GameController _instance;
