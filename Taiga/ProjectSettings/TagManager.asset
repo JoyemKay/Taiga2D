@@ -8,6 +8,7 @@ TagManager:
   - Object
   - PushBlock
   - RoomChapter
+  - Destructable
   layers:
   - Default
   - TransparentFX
@@ -19,28 +20,28 @@ TagManager:
   - 
   - Player Damage
   - Enemy Damage
+  - Collision_0
+  - Collision_1
+  - Collision_2
   - 
-  - Player
-  - Enemy
+  - 
+  - 
+  - 
+  - 
+  - 
   - Destructable
-  - MapCollision
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - RoomBoundary
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

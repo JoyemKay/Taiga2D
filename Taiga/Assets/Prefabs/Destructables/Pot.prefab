@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8331977933036805218}
   - component: {fileID: 8331977933036805213}
   - component: {fileID: 8331977933036805216}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Pot
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c43292b25504635a26f17be0cf0421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
   wOparent: {fileID: 0}
   resetable: 1
   hasBeenDisabled: 0

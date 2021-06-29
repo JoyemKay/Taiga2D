@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum ColliderCategory{
+    player,
+    enemy,
+    worldObject
+}
+
 //State used by character game objects
 public enum State
 {

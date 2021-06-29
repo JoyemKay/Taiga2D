@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7611696405864649770}
   - component: {fileID: 7611696405864649771}
   - component: {fileID: 2967369020967947456}
-  m_Layer: 15
+  m_Layer: 31
   m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,6 +166,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base Chapter
       objectReference: {fileID: 0}
+    - target: {fileID: 3514927666348075808, guid: 2c689b7e8e7874604a59ef0d167279bd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 370018113643862010, guid: 2c689b7e8e7874604a59ef0d167279bd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -220,6 +225,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 794447191824726814, guid: 2c689b7e8e7874604a59ef0d167279bd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 922239765119816458, guid: 2c689b7e8e7874604a59ef0d167279bd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c689b7e8e7874604a59ef0d167279bd, type: 3}

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class SpawnLocation : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer renderer;
+    SpriteRenderer thisRenderer;
     Vector2 direction;
+    public int floor;
     public Direction lookDirection;
 
     private void Awake()
     {
-        renderer.enabled = false;
+        thisRenderer = GetComponent<SpriteRenderer>();
+        thisRenderer.enabled = false;
     }
 
     public Vector2 GetDirection(){

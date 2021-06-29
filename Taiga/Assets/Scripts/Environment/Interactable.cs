@@ -6,11 +6,17 @@ using UnityEngine.Events;
 //  Use on objects that player can interact with
 [RequireComponent(typeof(Collider2D))]
 public class Interactable : MonoBehaviour{
+    public int floor = 0;
     Player player;
     public UnityEvent interactableEvent, disabledEvent;
     public bool active = true, oneTime, deactivateOnInteract, playerInRange, interactableByPlayerInput = true;
 
     bool hasInteracted;
+
+    public void Start()
+    {
+        SetFloor(floor);
+    }
 
     public void Update()
     {
@@ -82,6 +88,17 @@ public class Interactable : MonoBehaviour{
         gameObject.SetActive(false);
     }
 
+    public void SetFloor(int setFloor){
+        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+        if (sprites.Length > 0)
+        {
+            foreach (SpriteRenderer s in sprites)
+            {
+                s.sortingOrder = setFloor * 10 + 5;
+            }
+        }
+        GameController.Instance.SetColliderLayer(this.gameObject, setFloor);
+    }
     //  Mainly for debugging purpose, can be used to display a string to the Log
     public void DisplayDebug(string message){
         Debug.Log(message);

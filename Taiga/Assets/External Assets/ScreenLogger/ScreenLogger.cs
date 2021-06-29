@@ -115,6 +115,9 @@ namespace AClockworkBerry
 
         public void Awake()
         {
+            /*
+             *  Child of game controller, not added in editor.
+             * 
             ScreenLogger[] obj = GameObject.FindObjectsOfType<ScreenLogger>();
 
             if (obj.Length > 1)
@@ -127,10 +130,11 @@ namespace AClockworkBerry
                 return;
             }
 
-            InitStyles();
-
             if (IsPersistent)
                 DontDestroyOnLoad(this);
+            */
+
+            InitStyles();
 
 			SceneManager.sceneLoaded += OnSceneLoaded;
         }

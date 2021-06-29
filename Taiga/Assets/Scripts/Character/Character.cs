@@ -19,6 +19,7 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected State state;
     GameObject attackObject;
+    protected int currentFloor;
 
 #region Inheritance functions with funcitonality in childrens
     protected virtual void Start()
@@ -80,6 +81,13 @@ public class Character : MonoBehaviour
         state = stateBeforePause;
     }
 
+    public void SetFloor(int floor){
+
+        currentFloor = floor;
+        gfxRenderer.sortingOrder = floor * 10 + 5;
+        GameController.Instance.SetColliderLayer(this.gameObject, floor);
+    }
+
 #endregion
 
     //  Enables the attack object, initiating an attack. Should be called from animator
@@ -101,6 +109,11 @@ public class Character : MonoBehaviour
     public State GetState(){
         return state;
     }
+
+    public int GetFloor(){
+        return currentFloor;
+    }
+
 
 #region Astar-related scripts
     Vector3[] AstarPath;

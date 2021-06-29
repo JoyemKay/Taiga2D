@@ -10,13 +10,23 @@ public class Player : Character
     Vector2 interactOffset;
     public float interactDist;
     public bool canInteract = true;
+    bool hasStarted = false;
 
+    public void Initiate(int floor){
+        Start();
+        SetFloor(floor);
+
+    }
 
     //  Start is called before the first frame update
     protected override void Start()
     {
-        base.Start();
-        interactOffset = interactCollider.offset;
+        if (!hasStarted)
+        {
+            base.Start();
+            interactOffset = interactCollider.offset;
+            hasStarted = true;
+        }
     }
 
     //  Update is called once per frame

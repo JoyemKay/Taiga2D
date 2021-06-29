@@ -171,6 +171,8 @@ public class GameController : MonoBehaviour
         Vector2 spawnLocation = new Vector2();
         if (!levelSpawnLocation)
         {
+            Debug.Log("No Level spawn location found, spawning at origin.");
+
             spawnLocation = transform.position;
         }
         else
@@ -181,6 +183,7 @@ public class GameController : MonoBehaviour
         GameObject playerObject = Instantiate(playerPrefab, spawnLocation, Quaternion.identity);
         playerObject.name = "PlayerContainer";
         activePlayer = playerObject.GetComponent<Player>();
+        activePlayer.Initiate(levelSpawnLocation.floor);
         activePlayer.lookDirection = levelSpawnLocation.GetDirection();
 
     }
@@ -193,7 +196,14 @@ public class GameController : MonoBehaviour
 
     void SetupPlayer()
     {
+        
+    }
 
+    public void SetColliderLayer(GameObject callObject, int layerCode){
+
+        string layer = "Collision_" + layerCode.ToString();
+        Debug.Log("Layer change called on " + callObject.name + ", changing layer from: " + callObject.layer + " to: " + LayerMask.NameToLayer(layer));
+        callObject.layer = LayerMask.NameToLayer(layer);
     }
 
     public void ActivateRoom(Room activeRoom, BoxCollider2D roomCollider)
