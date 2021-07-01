@@ -8,8 +8,9 @@ using UnityEngine;
 public class WorldObject : MonoBehaviour
 {
     public string id;
+    public int floor;
     [Tooltip("If graphics are stored in a child of the game object, set parent as WOparent.")]
-    public Transform wOparent;
+    public Transform /*wOparent,*/ gfxObject;
     public bool resetable = true, hasBeenDisabled = false;
     public float offset;
     public Sprite[] alternateSprites;
@@ -24,80 +25,77 @@ public class WorldObject : MonoBehaviour
         if (!Initiated) { Setup(); }
     }
 
-    public void Setup(){
+    private void Start()
+    {
+        SetFloor(floor);
+    }
+
+    public void Setup()
+    {
         thisRenderer = GetComponent<SpriteRenderer>();
+        if (gfxObject)
+            thisRenderer = gfxObject.gameObject.GetComponent<SpriteRenderer>();
+
+        SetDepth(transform.localPosition);
+        startPos = transform.localPosition;
+
         AlternateSprite();
         selectedSprite = thisRenderer.sprite;
-        if (wOparent)
-        {
-            SetDepth(wOparent.position);
-            startPos = wOparent.position;
-        }
-        else
-        {
-            SetDepth(transform.localPosition);
-            startPos = transform.localPosition;
-        }
+
         Initiated = true;
     }
 
-    public void ResetPos(){
+    public void ResetPos()
+    {
         if (resetable || !hasBeenDisabled)
         {
-            if (wOparent)
+            if (!gameObject.activeInHierarchy)
             {
-                if(!wOparent.gameObject.activeInHierarchy){
-                    wOparent.gameObject.SetActive(true);
-                }
-                if (!((Vector2)wOparent.position == startPos))
-                {
-                    wOparent.position = startPos;
-                    SetDepth(wOparent.localPosition);
-                }
+                gameObject.SetActive(true);
             }
-            else
+            if (!((Vector2)transform.localPosition == startPos))
             {
-                if(!gameObject.activeInHierarchy){
-                    gameObject.SetActive(true);
-                }
-                if (!((Vector2)transform.localPosition == startPos))
-                {
-                    transform.localPosition = startPos;
-                    SetDepth(transform.localPosition);
-                }
+                transform.localPosition = startPos;
+                SetDepth(transform.localPosition);
             }
+
             thisRenderer.sprite = selectedSprite;
         }
     }
 
-    public void DisableGameObject(){
-        if(wOparent){
-            wOparent.gameObject.SetActive(false);
-        }else{
-            gameObject.SetActive(false);
-        }
-    }
-
-    public void DisableWorldObject(){
+    public void DisableWorldObject()
+    {
         hasBeenDisabled = true;
-        DisableGameObject();
+        gameObject.SetActive(false);
     }
-
 
     //  If z-pos is not set in editor, update the z-pos to right depth
     //
-    public void SetDepth(Vector3 objPos){
+    public void SetDepth(Vector3 objPos)
+    {
         Vector3 pos;
-        if (!wOparent)
-        {
-            pos = new Vector3(objPos.x, objPos.y, (objPos.y + offset) / 100);
-        }else{
-            pos = new Vector3(transform.localPosition.x, transform.localPosition.y, (objPos.y + offset) / 100);
-        }
+
+        pos = new Vector3(transform.localPosition.x, transform.localPosition.y, (objPos.y + offset) / 100);
+
         if (Mathf.Abs(pos.z - objPos.z / 100) > Mathf.Epsilon)
         {
             transform.localPosition = pos;
         }
+    }
+
+    // Sets sorting order and collision layer
+    //
+    public void SetFloor(int setFloor)
+    {
+        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
+        if (sprites.Length > 0)
+        {
+            foreach (SpriteRenderer s in sprites)
+            {
+                s.sortingOrder = setFloor * 10 + 5;
+            }
+        }
+        GameController.Instance.SetColliderLayer(this.gameObject, setFloor);
     }
 
     //  If alternate sprites exist in array, randomize sprite if roll is larger than (1- 1/(no of sprites))
@@ -108,7 +106,7 @@ public class WorldObject : MonoBehaviour
         {
 
             float randomize = Random.Range(0.0f, 1.0f);
-            //  Debug.Log(name + " roll: " + randomize * 100f);
+
             if (randomize > 1.0f / (alternateSprites.Length + 1.0f))
             {
                 for (int i = 0; i < alternateSprites.Length; i++)

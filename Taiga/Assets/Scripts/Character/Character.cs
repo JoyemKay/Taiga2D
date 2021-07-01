@@ -5,30 +5,31 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    
+
     State stateBeforePause;
     protected State previousState;
     public float moveSpeed, attackSpeed, offset;
     public GameObject gfx;
     public Transform target;
     public Vector2 lookDirection;
-    protected bool canAttack,canMove,hasMoved;
+    protected bool canAttack, canMove, hasMoved;
     protected float lastAttackTime;
-    protected  Rigidbody2D thisRigidbody;
+    protected Rigidbody2D thisRigidbody;
     protected SpriteRenderer gfxRenderer;
     [SerializeField]
     protected State state;
     GameObject attackObject;
     protected int currentFloor;
 
-#region Inheritance functions with funcitonality in childrens
+    #region Inheritance functions with funcitonality in childrens
     protected virtual void Start()
     {
         thisRigidbody = GetComponent<Rigidbody2D>();
         gfxRenderer = gfx.GetComponent<SpriteRenderer>();
         lastAttackTime = Time.time - attackSpeed;
         UpdateDepth();
-        if (GetComponentInChildren<Damage>()){
+        if (GetComponentInChildren<Damage>())
+        {
             attackObject = GetComponentInChildren<Damage>().gameObject;
             attackObject.SetActive(false);
         }
@@ -42,7 +43,7 @@ public class Character : MonoBehaviour
 
         if (state != State.paused && state != State.staggered)
         {
-            state = State.idle; 
+            state = State.idle;
             Move();
             Attack();
         }
@@ -51,47 +52,55 @@ public class Character : MonoBehaviour
         hasMoved = false;
     }
 
-    protected virtual void Move(){
+    protected virtual void Move()
+    {
         //  Should be overwritten
         //  Some condition determining if canWalk = false;
         canMove = true;
     }
 
     //Moves the character to position, only callable once per frame.
-    public void MoveTo(Vector2 position){
+    public void MoveTo(Vector2 position)
+    {
         if (!hasMoved) { thisRigidbody.MovePosition(position); }
         hasMoved = true;
     }
 
-    public void SetPosition(Vector2 position){
+    public void SetPosition(Vector2 position)
+    {
         transform.position = position;
     }
 
-    protected virtual void Attack(){
+    protected virtual void Attack()
+    {
         //  Should be overwritten, only controls that attackspeed is passed by before allowing attack
         canAttack = Time.time > lastAttackTime + attackSpeed;
     }
 
-    protected virtual void Pause(){
+    protected virtual void Pause()
+    {
         stateBeforePause = state;
         state = State.paused;
     }
 
-    protected virtual void Resume(){
+    protected virtual void Resume()
+    {
         state = stateBeforePause;
     }
 
-    public void SetFloor(int floor){
+    public void SetFloor(int floor)
+    {
 
         currentFloor = floor;
         gfxRenderer.sortingOrder = floor * 10 + 5;
         GameController.Instance.SetColliderLayer(this.gameObject, floor);
     }
 
-#endregion
+    #endregion
 
     //  Enables the attack object, initiating an attack. Should be called from animator
-    public void ToggleAttack(){
+    public void ToggleAttack()
+    {
         if (attackObject)
         {
             attackObject.SetActive(true);
@@ -101,27 +110,29 @@ public class Character : MonoBehaviour
     //  Sets the correct z-pos based on the current y-pos (for pseudo-3D depth)
     void UpdateDepth()
     {
-        if (Mathf.Abs(gfx.transform.position.z - (transform.position.y + offset) / 100) 
-            > 
+        if (Mathf.Abs(gfx.transform.position.z - (transform.position.y + offset) / 100)
+            >
             Mathf.Epsilon) { gfx.transform.localPosition = new Vector3(0, gfx.transform.localPosition.y, (transform.position.y + offset) / 100); }
     }
 
-    public State GetState(){
+    public State GetState()
+    {
         return state;
     }
 
-    public int GetFloor(){
+    public int GetFloor()
+    {
         return currentFloor;
     }
 
 
-#region Astar-related scripts
+    #region Astar-related scripts
     Vector3[] AstarPath;
 
     protected void AstarMove()
     {
-        AstarPathRequestManager.RequestPath(transform.position, 
-                                            target.position, 
+        AstarPathRequestManager.RequestPath(transform.position,
+                                            target.position,
                                             OnPathFound);
     }
 
@@ -135,9 +146,11 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void ResumePath(){
-        if(AstarPath != null){
-            
+    public void ResumePath()
+    {
+        if (AstarPath != null)
+        {
+
         }
     }
 
@@ -153,14 +166,14 @@ public class Character : MonoBehaviour
             //  Only move towards next position if not paused or staggered
             if (state != State.paused || state != State.staggered)
             {
-                     if ((transform.position  - currentWaypoint).sqrMagnitude < tolerance)
+                if ((transform.position - currentWaypoint).sqrMagnitude < tolerance)
 
                 {
                     targetIndex++;
-                    if (targetIndex >= AstarPath.Length) 
+                    if (targetIndex >= AstarPath.Length)
                     {
                         AstarPath = null;
-                        yield break; 
+                        yield break;
                     }
                     currentWaypoint = AstarPath[targetIndex] + offsetVector;
                 }
@@ -175,7 +188,8 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void StopAstarMove(){
+    public void StopAstarMove()
+    {
         StopCoroutine("FollowPath");
         AstarPath = null;
         state = State.idle;
@@ -195,6 +209,6 @@ public class Character : MonoBehaviour
             }
         }
     }
-#endregion
+    #endregion
 
 }

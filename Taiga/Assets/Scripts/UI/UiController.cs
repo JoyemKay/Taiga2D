@@ -11,31 +11,38 @@ public class UiController : MonoBehaviour
     public float roomNameFadeOutTime;
     bool okToFadeIn;
 
-    public void TryDisplayRoomName(Room room){
-        if(RoomLocationText.enabled){
+    public void TryDisplayRoomName(Room room)
+    {
+        if (RoomLocationText.enabled)
+        {
             StopCoroutine(RoomNameFader());
         }
-        if(room.displayRoomName){
+        if (room.displayRoomName)
+        {
             RoomLocationText.text = room.roomName;
             RoomLocationText.enabled = true;
             StartCoroutine(RoomNameFader());
         }
     }
 
-    public void FadeRoom(float fadeOut,float fadeIn){
-        StartCoroutine(FadeOut(fadeOut)); 
-        StartCoroutine(FadeIn(fadeIn)); 
+    public void FadeRoom(float fadeOut, float fadeIn)
+    {
+        StartCoroutine(FadeOut(fadeOut));
+        StartCoroutine(FadeIn(fadeIn));
     }
 
-    IEnumerator RoomNameFader(){
+    IEnumerator RoomNameFader()
+    {
         yield return new WaitForSecondsRealtime(roomNameFadeOutTime);
         RoomLocationText.enabled = false;
     }
 
-    IEnumerator FadeOut(float time){
+    IEnumerator FadeOut(float time)
+    {
         RoomFader.enabled = true;
         float fadeTime = Time.unscaledTime;
-        while(Time.unscaledTime < (fadeTime + time)){
+        while (Time.unscaledTime < (fadeTime + time))
+        {
             Color fadeColor = new Color(RoomFader.color.r, RoomFader.color.g, RoomFader.color.b, 1 - ((fadeTime + time - Time.unscaledTime) / time));
             RoomFader.color = fadeColor;
             yield return null;
@@ -43,8 +50,10 @@ public class UiController : MonoBehaviour
         okToFadeIn = true;
     }
 
-    IEnumerator FadeIn(float time){
-        while(!okToFadeIn){
+    IEnumerator FadeIn(float time)
+    {
+        while (!okToFadeIn)
+        {
             yield return null;
         }
         float fadeTime = Time.unscaledTime;
@@ -58,7 +67,8 @@ public class UiController : MonoBehaviour
         okToFadeIn = false;
     }
 
-    public void PauseScreen(){
+    public void PauseScreen()
+    {
         pauseScreen.SetActive(!pauseScreen.activeInHierarchy);
     }
 }

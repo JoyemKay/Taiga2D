@@ -14,7 +14,6 @@ public class FloorTransit : MonoBehaviour
             return;
         if (character.GetFloor() == fromFloor)
         {
-            Debug.Log("Changing floor from: " + fromFloor + " to: " + toFloor + " for: " + character.name);
             character.SetFloor(toFloor);
         }
     }

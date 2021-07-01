@@ -53,10 +53,11 @@ public class GameController : MonoBehaviour
         Random.InitState(System.DateTime.Now.Millisecond);
 
         if (!grid) { grid = GetComponentInChildren<AstarGrid>(); }
-        if (!ui) 
-        { 
-            ui = GetComponentInChildren<UiController>(); 
-            if(!floatingTextManager){
+        if (!ui)
+        {
+            ui = GetComponentInChildren<UiController>();
+            if (!floatingTextManager)
+            {
                 floatingTextManager = ui.gameObject.GetComponentInChildren<FloatingTextManager>();
                 if (!floatingTextManager) { Debug.Log("No FloatingTextManager found..."); }
             }
@@ -181,7 +182,7 @@ public class GameController : MonoBehaviour
         }
 
         GameObject playerObject = Instantiate(playerPrefab, spawnLocation, Quaternion.identity);
-        playerObject.name = "PlayerContainer";
+        playerObject.name = "Player";
         activePlayer = playerObject.GetComponent<Player>();
         activePlayer.Initiate(levelSpawnLocation.floor);
         activePlayer.lookDirection = levelSpawnLocation.GetDirection();
@@ -196,10 +197,11 @@ public class GameController : MonoBehaviour
 
     void SetupPlayer()
     {
-        
+
     }
 
-    public void SetColliderLayer(GameObject callObject, int layerCode){
+    public void SetColliderLayer(GameObject callObject, int layerCode)
+    {
 
         string layer = "Collision_" + layerCode.ToString();
         Debug.Log("Layer change called on " + callObject.name + ", changing layer from: " + callObject.layer + " to: " + LayerMask.NameToLayer(layer));
@@ -264,7 +266,8 @@ public class GameController : MonoBehaviour
     }
 
     #region floating text related
-    public void ShowFloatingText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration){
+    public void ShowFloatingText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
+    {
         floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
     }
     #endregion

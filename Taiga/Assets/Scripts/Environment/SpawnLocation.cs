@@ -15,8 +15,10 @@ public class SpawnLocation : MonoBehaviour
         thisRenderer.enabled = false;
     }
 
-    public Vector2 GetDirection(){
-        switch(lookDirection){
+    public Vector2 GetDirection()
+    {
+        switch (lookDirection)
+        {
             case Direction.up:
                 direction = Vector2.up;
                 break;
@@ -35,5 +37,4 @@ public class SpawnLocation : MonoBehaviour
         }
         return direction;
     }
-
 }

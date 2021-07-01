@@ -5,20 +5,24 @@ using UnityEngine;
 
 //  Generic class for trigger colliders that invokes a damage reaction on target
 //  Layer on damage object dictates what other objects can be interacted with
-public class Damage : MonoBehaviour{
+public class Damage : MonoBehaviour
+{
     float activeTime = 0.1f;
     bool hasHit;
     [SerializeField]
     float damage;
 
 
-    private void OnTriggerEnter2D(Collider2D other){
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         // Only deal damage to first valid target hit
-        if (!hasHit){
+        if (!hasHit)
+        {
             //  If colliding collider is a destructable, 
             //  start objects destroy animation, then disable damage object
             Destructable destructable = other.gameObject.GetComponent<Destructable>();
-            if (destructable){
+            if (destructable)
+            {
                 destructable.StartDestroyAnimator();
                 hasHit = true;
                 gameObject.SetActive(false);
@@ -30,16 +34,19 @@ public class Damage : MonoBehaviour{
     }
 
     // Used for debugging only, attacks are handled in animator
-    IEnumerator DelayActive(){
+    IEnumerator DelayActive()
+    {
         yield return new WaitForSeconds(activeTime);
-        if (gameObject.activeInHierarchy){
+        if (gameObject.activeInHierarchy)
+        {
             gameObject.SetActive(false);
         }
     }
 
     //  Resets the hasHit variable when object is enabled
     //      
-    private void OnEnable(){
+    private void OnEnable()
+    {
         hasHit = false;
         //DEBBUGING ONLY, state should be set in animator
         StartCoroutine(DelayActive());

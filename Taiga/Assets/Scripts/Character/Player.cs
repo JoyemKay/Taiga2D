@@ -12,7 +12,8 @@ public class Player : Character
     public bool canInteract = true;
     bool hasStarted = false;
 
-    public void Initiate(int floor){
+    public void Initiate(int floor)
+    {
         Start();
         SetFloor(floor);
 
@@ -39,10 +40,12 @@ public class Player : Character
     protected override void Move()
     {
         base.Move();
-        if(canMove){
-            
+        if (canMove)
+        {
+
             //Disables gliding after pause state
-            if(previousState == State.paused){
+            if (previousState == State.paused)
+            {
                 Input.ResetInputAxes();
                 return;
             }
@@ -50,7 +53,8 @@ public class Player : Character
                               Input.GetAxis("Vertical"));
 
 
-            if(movePos.sqrMagnitude > Mathf.Epsilon){
+            if (movePos.sqrMagnitude > Mathf.Epsilon)
+            {
                 state = State.moving;
                 lookDirection = movePos.normalized;
 
@@ -64,7 +68,8 @@ public class Player : Character
     {
         base.Attack();
         //  Only attack if able to
-        if(Input.GetButtonDown("Attack") && canAttack){
+        if (Input.GetButtonDown("Attack") && canAttack)
+        {
             //  TODO: Start attack animation
             //  For debugging purposes only, enabling attack hitbox should be done in animaton
             ToggleAttack();

@@ -24,13 +24,16 @@ public class Enemy : Character
     }
 
     //Only enables the Enemy game object if it is resettable or hasnt been killed.
-    public void TrySetActive(){
-        if(resetable || isAlive){
+    public void TrySetActive()
+    {
+        if (resetable || isAlive)
+        {
             gameObject.SetActive(true);
         }
     }
 
-    public void SetInactive(){
+    public void SetInactive()
+    {
         StopAstarMove();
         gameObject.SetActive(false);
     }

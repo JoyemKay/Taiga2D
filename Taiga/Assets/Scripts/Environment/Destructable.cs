@@ -12,20 +12,15 @@ public class Destructable : MonoBehaviour
 
     //  Needs to be called before WordObject.Start(), otherwise randomizing of sprite is overwritten by animator.
     //
-    void Awake(){
+    void Awake()
+    {
         thisAnimator = GetComponent<Animator>();
         thisCollider = GetComponent<Collider2D>();
         thisAnimator.enabled = false;
     }
 
-    private void Start()
+    public void StartDestroyAnimator()
     {
-        SetFloor(floor);
-    }
-
-    //  Triggers the destroy animation and destroys object, is called from Damage object on hit.
-    //
-    public void StartDestroyAnimator(){
         thisAnimator.enabled = true;
         thisCollider.enabled = false;
         thisAnimator.SetTrigger("destroy");
@@ -33,7 +28,8 @@ public class Destructable : MonoBehaviour
 
     //  If something is suppose to happen when object is destroyed, it's invoked
     // via OnDestroyEvent (loot drop, opening of door etc.)
-    public void Destroy(){
+    public void Destroy()
+    {
         OnDestroyEvent.Invoke();
         GetComponent<WorldObject>().DisableWorldObject();
         gameObject.SetActive(false);
@@ -43,17 +39,5 @@ public class Destructable : MonoBehaviour
     {
         thisAnimator.enabled = false;
         thisCollider.enabled = true;
-    }
-    public void SetFloor(int setFloor)
-    {
-        SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>();
-        if (sprites.Length > 0)
-        {
-            foreach (SpriteRenderer s in sprites)
-            {
-                s.sortingOrder = setFloor * 10 + 5;
-            }
-        }
-        GameController.Instance.SetColliderLayer(this.gameObject, setFloor);
     }
 }

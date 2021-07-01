@@ -229,7 +229,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7865952801854278504}
   - component: {fileID: 7865952801854278506}
-  - component: {fileID: 7865952801854278507}
   m_Layer: 0
   m_Name: gfx
   m_TagString: Untagged
@@ -301,23 +300,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7865952801854278507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7865952801854278505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55c43292b25504635a26f17be0cf0421, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wOparent: {fileID: 7865952802145190594}
-  resetable: 1
-  hasBeenDisabled: 0
-  offset: 0
-  alternateSprites: []
 --- !u!1 &7865952802145190595
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +312,7 @@ GameObject:
   - component: {fileID: 7865952802145190589}
   - component: {fileID: 7865952802145190590}
   - component: {fileID: 7865952802145190585}
+  - component: {fileID: 3583840617887225980}
   m_Layer: 0
   m_Name: Push Block
   m_TagString: PushBlock
@@ -423,6 +406,25 @@ MonoBehaviour:
   pushLength: 1
   pushDuration: 0.67
   pushDelay: 0.67
+--- !u!114 &3583840617887225980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7865952802145190595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55c43292b25504635a26f17be0cf0421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 
+  floor: 0
+  gfxObject: {fileID: 7865952801854278504}
+  resetable: 1
+  hasBeenDisabled: 0
+  offset: 0
+  alternateSprites: []
 --- !u!1 &7865952802198959472
 GameObject:
   m_ObjectHideFlags: 0
