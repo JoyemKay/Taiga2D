@@ -49,16 +49,23 @@ public class Player : Character
                 Input.ResetInputAxes();
                 return;
             }
-            Vector2 movePos = new Vector2(Input.GetAxis("Horizontal"),
-                              Input.GetAxis("Vertical"));
-
+            Vector2 movePos = new Vector2(
+                                Input.GetAxis("Horizontal"),
+                                Input.GetAxis("Vertical"));
+            
 
             if (movePos.sqrMagnitude > Mathf.Epsilon)
             {
                 state = State.moving;
+                SetAnimatorValue("isMoving", true);
                 lookDirection = movePos.normalized;
+                SetAnimatorValue("lookX", lookDirection.x);
+                SetAnimatorValue("lookY", lookDirection.y);
+                Flip(Mathf.Sign(lookDirection.x));
 
                 MoveTo(new Vector2(transform.position.x, transform.position.y) + movePos * moveSpeed * Time.deltaTime);
+            }else{
+                SetAnimatorValue("isMoving", false);
             }
         }
 

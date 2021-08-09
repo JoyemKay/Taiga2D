@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
     protected float lastAttackTime;
     protected Rigidbody2D thisRigidbody;
     protected SpriteRenderer gfxRenderer;
+    protected Animator gfxAnimator;
     [SerializeField]
     protected State state;
     GameObject attackObject;
@@ -26,6 +27,7 @@ public class Character : MonoBehaviour
     {
         thisRigidbody = GetComponent<Rigidbody2D>();
         gfxRenderer = gfx.GetComponent<SpriteRenderer>();
+        gfxAnimator = gfxRenderer.GetComponent<Animator>();
         lastAttackTime = Time.time - attackSpeed;
         UpdateDepth();
         if (GetComponentInChildren<Damage>())
@@ -70,6 +72,26 @@ public class Character : MonoBehaviour
     {
         transform.position = position;
     }
+
+    #region animation
+
+    //flips gfx horizontally if flip and current scale doesnt match
+    public void Flip(float flip){
+        if (Mathf.Sign(gfx.transform.localScale.x) != flip)
+        {
+            gfx.transform.localScale = new Vector3(flip, 1);
+        }
+    }
+
+    public void SetAnimatorValue(string boolName, bool value){
+        gfxAnimator.SetBool(boolName, value);
+    }
+
+    public void SetAnimatorValue(string boolName, float value){
+        gfxAnimator.SetFloat(boolName, value);
+    }
+
+    #endregion
 
     protected virtual void Attack()
     {
