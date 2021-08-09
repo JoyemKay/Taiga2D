@@ -56,7 +56,7 @@ public class Player : Character
 
             if (movePos.sqrMagnitude > Mathf.Epsilon)
             {
-                state = State.moving;
+                SetState(State.moving);
                 SetAnimatorValue("isMoving", true);
                 lookDirection = movePos.normalized;
                 SetAnimatorValue("lookX", lookDirection.x);
@@ -77,9 +77,8 @@ public class Player : Character
         //  Only attack if able to
         if (Input.GetButtonDown("Attack") && canAttack)
         {
-            //  TODO: Start attack animation
-            //  For debugging purposes only, enabling attack hitbox should be done in animaton
-            ToggleAttack();
+            SetState(State.attacking);
+            SetAnimatorValue("attack");
             lastAttackTime = Time.time;
         }
     }

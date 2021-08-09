@@ -10,13 +10,13 @@ public enum Direction{
 }
 public class PushBlock : MonoBehaviour
 {
-    [SerializeField]
-    private MoveTrigger up,down,left,right;
+
+    public MoveTrigger up,down,left,right;
     public int pushAmount;
     int _pushAmount;
     int moveTicker = 0;
     [SerializeField]
-    float pushLength, pushDuration, pushDelay;
+    public float pushLength, pushDuration, pushDelay;
     float pushTimer;
     private bool pushable = true, push, moving;
     private Rigidbody2D thisRB;

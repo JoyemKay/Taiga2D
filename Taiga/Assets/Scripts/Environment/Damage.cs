@@ -51,4 +51,5 @@ public class Damage : MonoBehaviour
         //DEBBUGING ONLY, state should be set in animator
         StartCoroutine(DelayActive());
     }
+
 }

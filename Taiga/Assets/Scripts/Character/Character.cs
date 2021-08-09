@@ -27,7 +27,7 @@ public class Character : MonoBehaviour
     {
         thisRigidbody = GetComponent<Rigidbody2D>();
         gfxRenderer = gfx.GetComponent<SpriteRenderer>();
-        gfxAnimator = gfxRenderer.GetComponent<Animator>();
+        gfxAnimator = GetComponent<Animator>();
         lastAttackTime = Time.time - attackSpeed;
         UpdateDepth();
         if (GetComponentInChildren<Damage>())
@@ -43,9 +43,9 @@ public class Character : MonoBehaviour
         else
         if (!GameController.Instance.IsPaused && state == State.paused) { Resume(); }
 
-        if (state != State.paused && state != State.staggered)
+        if (state != State.paused && state != State.staggered && state != State.attacking)
         {
-            state = State.idle;
+            SetState(State.idle);
             Move();
             Attack();
         }
@@ -57,41 +57,10 @@ public class Character : MonoBehaviour
     protected virtual void Move()
     {
         //  Should be overwritten
-        //  Some condition determining if canWalk = false;
+        //  Some condition determining if canMove = false;
         canMove = true;
     }
 
-    //Moves the character to position, only callable once per frame.
-    public void MoveTo(Vector2 position)
-    {
-        if (!hasMoved) { thisRigidbody.MovePosition(position); }
-        hasMoved = true;
-    }
-
-    public void SetPosition(Vector2 position)
-    {
-        transform.position = position;
-    }
-
-    #region animation
-
-    //flips gfx horizontally if flip and current scale doesnt match
-    public void Flip(float flip){
-        if (Mathf.Sign(gfx.transform.localScale.x) != flip)
-        {
-            gfx.transform.localScale = new Vector3(flip, 1);
-        }
-    }
-
-    public void SetAnimatorValue(string boolName, bool value){
-        gfxAnimator.SetBool(boolName, value);
-    }
-
-    public void SetAnimatorValue(string boolName, float value){
-        gfxAnimator.SetFloat(boolName, value);
-    }
-
-    #endregion
 
     protected virtual void Attack()
     {
@@ -110,6 +79,49 @@ public class Character : MonoBehaviour
         state = stateBeforePause;
     }
 
+    #endregion
+
+
+    #region animation
+
+    //flips gfx horizontally if flip and current scale doesnt match
+    public void Flip(float flip)
+    {
+        if (Mathf.Sign(gfx.transform.localScale.x) != flip)
+        {
+            gfx.transform.localScale = new Vector3(flip, 1);
+        }
+    }
+
+    public void SetAnimatorValue(string boolName, bool value)
+    {
+        gfxAnimator.SetBool(boolName, value);
+    }
+
+    public void SetAnimatorValue(string boolName, float value)
+    {
+        gfxAnimator.SetFloat(boolName, value);
+    }
+
+    public void SetAnimatorValue(string name)
+    {
+        gfxAnimator.SetTrigger(name);
+    }
+
+    #endregion
+
+    //Moves the character to position, only callable once per frame.
+    public void MoveTo(Vector2 position)
+    {
+        if (!hasMoved) { thisRigidbody.MovePosition(position); }
+        hasMoved = true;
+    }
+
+    public void SetPosition(Vector2 position)
+    {
+        transform.position = position;
+    }
+
     public void SetFloor(int floor)
     {
 
@@ -117,8 +129,6 @@ public class Character : MonoBehaviour
         gfxRenderer.sortingOrder = floor * 10 + 5;
         GameController.Instance.SetColliderLayer(this.gameObject, floor);
     }
-
-    #endregion
 
     //  Enables the attack object, initiating an attack. Should be called from animator
     public void ToggleAttack()
@@ -129,12 +139,24 @@ public class Character : MonoBehaviour
         }
     }
 
+    // Disables the attack object at end of animation, called from animator
+    public void DisableAttack()
+    {
+        if (attackObject)
+        {
+            attackObject.SetActive(false);
+        }
+    }
     //  Sets the correct z-pos based on the current y-pos (for pseudo-3D depth)
     void UpdateDepth()
     {
         if (Mathf.Abs(gfx.transform.position.z - (transform.position.y + offset) / 100)
             >
             Mathf.Epsilon) { gfx.transform.localPosition = new Vector3(0, gfx.transform.localPosition.y, (transform.position.y + offset) / 100); }
+    }
+
+    public void SetState(State newState){
+        state = newState;
     }
 
     public State GetState()
