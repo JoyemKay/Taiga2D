@@ -133,7 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 
-  wOparent: {fileID: 0}
+  floor: 0
+  gfxObject: {fileID: 0}
   resetable: 1
   hasBeenDisabled: 0
   offset: 0
@@ -153,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8deb37925c86e41b9acbe833d367451f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floor: 0
   OnDestroyEvent:
     m_PersistentCalls:
       m_Calls: []
