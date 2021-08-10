@@ -14,6 +14,7 @@ public class Player : Character
 
     public void Initiate(int floor)
     {
+        gameObject.SetActive(true);
         Start();
         SetFloor(floor);
 

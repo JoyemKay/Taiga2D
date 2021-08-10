@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using AClockworkBerry;
 
@@ -10,6 +11,9 @@ public class GameController : MonoBehaviour
     public Chapter currentChapter;
     public Player activePlayer;
     public GameObject playerPrefab;
+    GameObject sessionPlayerObject;
+    bool hasSessionPlayer;
+
     public bool debugging;
     public static GameController Instance
     {
@@ -26,7 +30,7 @@ public class GameController : MonoBehaviour
 
 
     float currentTimeScale = 1, roomTransitionDelay = 4f;
-    bool _isPaused;
+    bool _isPaused, sceneInstantiated;
     static GameController _instance;
     UiController ui;
     SpawnLocation levelSpawnLocation;
@@ -38,19 +42,37 @@ public class GameController : MonoBehaviour
     //Debugging
     ScreenLogger screenLogger;
 
+    private void OnEnable()
+    {
+        Debug.Log("Game Controller " + gameObject.GetInstanceID() + " was enabled.");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        TryInstantiateScene();
+    }
+
     private void Awake()
     {
+        Debug.Log("Awake call on " + name + ",ID: "+ gameObject.GetInstanceID());
         #region singleton pattern
         if (_instance != null && _instance != this)
         {
+            Debug.Log("Duplicate of singleton " + name + " detected, terminating copy...");
             Destroy(this.gameObject);
             return;
         }
-
-        _instance = this;
+        if (_isPaused != this)
+        {
+            _instance = this;
+        }
         DontDestroyOnLoad(this.gameObject);
         #endregion
+
         Random.InitState(System.DateTime.Now.Millisecond);
+
+        Debug.Log("Time scale is: " + Time.timeScale);
 
         if (!grid) { grid = GetComponentInChildren<AstarGrid>(); }
         if (!ui)
@@ -68,28 +90,8 @@ public class GameController : MonoBehaviour
 
         cameraController.Initiate();
 
-        //Sets up all Rooms in the Scene, then disables children Chapters
-        Room[] sceneRooms = FindObjectsOfType<Room>();
+        TryInstantiateScene();
 
-        Debug.Log("Found " + sceneRooms.Length + " rooms, calling setup...");
-
-        levelSpawnLocation = null;
-        for (int i = 0; i < sceneRooms.Length; i++)
-        {
-            if (sceneRooms[i].isDefaultRoom) { levelSpawnLocation = sceneRooms[i].GetComponentInChildren<SpawnLocation>(); }
-            sceneRooms[i].Setup();
-        }
-        if (!levelSpawnLocation)
-        {
-            levelSpawnLocation = FindObjectOfType<SpawnLocation>();
-            if (!levelSpawnLocation)
-            {
-                Debug.Log("WARNING: No active spawn location in scene, defaulting to bottom left corner.");
-            }
-        }
-
-        InstantiatePlayer();
-        cameraController.target = activePlayer.gameObject;
 
         //DEBUGGING
         if (!debugging)
@@ -104,6 +106,8 @@ public class GameController : MonoBehaviour
 
     public void Update()
     {
+
+        //TODO: Should be in UiController
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Pause key pressed!");
@@ -145,11 +149,25 @@ public class GameController : MonoBehaviour
     }
     #endregion
 
-    public void ChangeLevel()
+    public void ChangeLevel(string sceneName)
     {
         //TODO: Transition to level stated in transition variable. Do level exit stuff (save and clear memory).
+        //TODO: Save values of player object, reinstatiate with that instead of prefab
+        Pause();
+        activePlayer.transform.parent = transform;
         activePlayer.gameObject.SetActive(false);
+        sceneInstantiated = false;
+
         Debug.Log("Changing level...");
+        StartCoroutine(AsyncSceneLoad(sceneName));
+    }
+
+    IEnumerator AsyncSceneLoad(string sceneName){
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        while(!asyncLoad.isDone){
+            yield return null;
+        }
     }
 
     //Changes the current chapter of the game, and scene. Enables the Chapter in the active Room.
@@ -167,8 +185,47 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void InstantiatePlayer()
+    private void TryInstantiateScene(){
+        Debug.Log("Trying to instantiate scene...");
+        if (!sceneInstantiated)
+        {
+            if (IsPaused)
+            {
+                Resume();
+            }
+
+            Debug.Log("Scene is not instantiated, proceeding...");
+            //Sets up all Rooms in the Scene, then disables children Chapters
+            Room[] sceneRooms = FindObjectsOfType<Room>();
+
+            Debug.Log("Found " + sceneRooms.Length + " rooms, calling setup...");
+
+            levelSpawnLocation = null;
+            for (int i = 0; i < sceneRooms.Length; i++)
+            {
+                if (sceneRooms[i].isDefaultRoom) { levelSpawnLocation = sceneRooms[i].GetComponentInChildren<SpawnLocation>(); }
+                sceneRooms[i].Setup();
+            }
+            if (!levelSpawnLocation)
+            {
+                levelSpawnLocation = FindObjectOfType<SpawnLocation>();
+                if (!levelSpawnLocation)
+                {
+                    Debug.Log("WARNING: No active spawn location in scene, defaulting to bottom left corner.");
+                }
+            }
+            sceneInstantiated = true;
+
+            InstantiatePlayer();
+            cameraController.target = activePlayer.gameObject;
+            return;
+        }
+        Debug.Log("Scene was already instantiated, returning.");
+    }
+
+    private void InstantiatePlayer()
     {
+        Debug.Log("Instantiating player object...");
         Vector2 spawnLocation = new Vector2();
         if (!levelSpawnLocation)
         {
@@ -180,13 +237,50 @@ public class GameController : MonoBehaviour
         {
             spawnLocation = levelSpawnLocation.transform.position;
         }
+        GameObject playerObject;
+        if (!hasSessionPlayer)
+        {
+            Debug.Log("No player object in hierarchy, instantiating player prefab...");
+            playerObject = Instantiate(playerPrefab, spawnLocation, Quaternion.identity);
+            playerObject.name = "Player";
+            activePlayer = playerObject.GetComponent<Player>();
+            hasSessionPlayer = true;
+        }else{
+            Debug.Log("Active player found, continuing with player in hierarchy...");
+            activePlayer.transform.parent = null;
+            playerObject = activePlayer.gameObject;
+            playerObject.transform.position = spawnLocation;
+            SceneManager.MoveGameObjectToScene(playerObject, SceneManager.GetActiveScene());
+        }
 
-        GameObject playerObject = Instantiate(playerPrefab, spawnLocation, Quaternion.identity);
-        playerObject.name = "Player";
-        activePlayer = playerObject.GetComponent<Player>();
         activePlayer.Initiate(levelSpawnLocation.floor);
-        activePlayer.lookDirection = levelSpawnLocation.GetDirection();
+        activePlayer.lookDirection = GetDirection(levelSpawnLocation.lookDirection);
 
+    }
+
+    //Converts from struct Direction into Vector2
+    static public Vector2 GetDirection(Direction lookDirection)
+    {
+        Vector2 direction;
+        switch (lookDirection)
+        {
+            case Direction.up:
+                direction = Vector2.up;
+                break;
+            case Direction.down:
+                direction = Vector2.down;
+                break;
+            case Direction.left:
+                direction = Vector2.left;
+                break;
+            case Direction.right:
+                direction = Vector2.right;
+                break;
+            default:
+                direction = Vector2.zero;
+                break;
+        }
+        return direction;
     }
 
     public void LinkPlayer(Player player)
@@ -249,7 +343,7 @@ public class GameController : MonoBehaviour
         if (!transition.isLevelTransition) { transition.Transition(); }
         else
         {
-            ChangeLevel();
+            ChangeLevel(transition.levelToLoad);
             yield break;
         }
         //New room won't trigger while game is paused
@@ -262,7 +356,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSecondsRealtime(roomTransitionDelay / 4);
 
         Resume();
-        if (transition.isLevelTransition) { ChangeLevel(); }
+        //  if (transition.isLevelTransition) { ChangeLevel(transition.levelToLoad); }
     }
 
     #region floating text related

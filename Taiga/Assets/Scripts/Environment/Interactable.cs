@@ -7,12 +7,15 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
 public class Interactable : MonoBehaviour
 {
-    public int floor = 0;
     Player player;
-    public UnityEvent interactableEvent, disabledEvent;
-    public bool active = true, oneTime, deactivateOnInteract, playerInRange, interactableByPlayerInput = true;
+    public UnityEvent activeEvent, disabledEvent;
+    public bool     active = true,                      // Determines if the Active or Disabled Event triggers on Interact.
+                    interactOnTriggerEnter,             // Should the Interact happen on the player entering trigger collider?
+                    oneTime,                            // Should the Interact only be able to happen once
+                    deactivateOnInteract,               // Should the Object be disabled on Interact?
+                    interactableByPlayerInput = true;   // Should the player be able to Interact by object trigger collider?
 
-    bool hasInteracted;
+    bool hasInteracted, playerInRange;
 
     public void Update()
     {
@@ -39,7 +42,7 @@ public class Interactable : MonoBehaviour
                 return;
             }
 
-            interactableEvent.Invoke();
+            activeEvent.Invoke();
             hasInteracted = true;
             if (deactivateOnInteract)
             {
@@ -62,6 +65,9 @@ public class Interactable : MonoBehaviour
             {
                 playerInRange = true;
                 player = other.GetComponent<Player>();
+                if(interactOnTriggerEnter){
+                    Interact();
+                }
             }
         }
     }
@@ -78,6 +84,11 @@ public class Interactable : MonoBehaviour
         }
     }
 
+    //Toggles the active state
+    public void ToggleActiveState(){
+        active = !active;
+    }
+    /*
     public void SetActivated()
     {
         active = true;
@@ -87,7 +98,7 @@ public class Interactable : MonoBehaviour
     {
         active = false;
     }
-
+    */
     public void DeactivateOnInteract()
     {
         gameObject.SetActive(false);

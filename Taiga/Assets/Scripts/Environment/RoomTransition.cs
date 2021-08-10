@@ -7,6 +7,7 @@ public class RoomTransition : MonoBehaviour
     BoxCollider2D transitionCollider;
     float transitionDelay = 1,timer = 0;
     public bool isLevelTransition = false;
+    public string levelToLoad;
     //TODO: add appropriate value for name or varibable to next level.
     public float extraDistance = 0;
     public TransitionDirection direction;
