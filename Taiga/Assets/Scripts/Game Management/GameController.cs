@@ -27,10 +27,12 @@ public class GameController : MonoBehaviour
     {
         get { return _isPaused; }
     }
-
+    public bool SceneFinishedLoading{
+        get { return _sceneFinishedLoading; }
+    }
 
     float currentTimeScale = 1, roomTransitionDelay = 4f;
-    bool _isPaused, sceneInstantiated;
+    bool _isPaused, sceneInstantiated, _sceneFinishedLoading;
     static GameController _instance;
     UiController ui;
     SpawnLocation levelSpawnLocation;
@@ -41,6 +43,7 @@ public class GameController : MonoBehaviour
 
     //Debugging
     ScreenLogger screenLogger;
+    public float sceneLoadDelayTime, blackOutDelay;
 
     private void OnEnable()
     {
@@ -153,21 +156,26 @@ public class GameController : MonoBehaviour
     {
         //TODO: Transition to level stated in transition variable. Do level exit stuff (save and clear memory).
         //TODO: Save values of player object, reinstatiate with that instead of prefab
+        _sceneFinishedLoading = false;
         Pause();
+        ui.SceneTransitionFader(sceneLoadDelayTime, blackOutDelay);
+        Debug.Log(Time.frameCount + ": 1. Changing level...");
+        StartCoroutine(AsyncSceneLoad(sceneName, sceneLoadDelayTime/2));
+    }
+
+    IEnumerator AsyncSceneLoad(string sceneName, float delay){
+        yield return new WaitForSecondsRealtime(delay);
+        Debug.Log(Time.frameCount + ": 3G. Fade out time has passed, loading new level...");
         activePlayer.transform.parent = transform;
         activePlayer.gameObject.SetActive(false);
         sceneInstantiated = false;
-
-        Debug.Log("Changing level...");
-        StartCoroutine(AsyncSceneLoad(sceneName));
-    }
-
-    IEnumerator AsyncSceneLoad(string sceneName){
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
         while(!asyncLoad.isDone){
             yield return null;
         }
+        _sceneFinishedLoading = true;
+        Debug.Log(Time.frameCount + ": 4. Level has finished loading...");
     }
 
     //Changes the current chapter of the game, and scene. Enables the Chapter in the active Room.
@@ -189,11 +197,6 @@ public class GameController : MonoBehaviour
         Debug.Log("Trying to instantiate scene...");
         if (!sceneInstantiated)
         {
-            if (IsPaused)
-            {
-                Resume();
-            }
-
             Debug.Log("Scene is not instantiated, proceeding...");
             //Sets up all Rooms in the Scene, then disables children Chapters
             Room[] sceneRooms = FindObjectsOfType<Room>();
@@ -218,6 +221,7 @@ public class GameController : MonoBehaviour
 
             InstantiatePlayer();
             cameraController.target = activePlayer.gameObject;
+
             return;
         }
         Debug.Log("Scene was already instantiated, returning.");
@@ -291,7 +295,7 @@ public class GameController : MonoBehaviour
 
     void SetupPlayer()
     {
-
+        //TODO: get stats from playerStats
     }
 
     public void SetColliderLayer(GameObject callObject, int layerCode)
@@ -329,6 +333,8 @@ public class GameController : MonoBehaviour
         StartCoroutine(TransitionDelay(transition));
     }
 
+
+    //It feels like this should be under RoomTransition, maybe scene changes are not to be triggered with RoomTransition?
     IEnumerator TransitionDelay(RoomTransition transition)
     {
         //Black out the screen here
