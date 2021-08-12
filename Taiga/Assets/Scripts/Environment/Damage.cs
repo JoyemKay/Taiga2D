@@ -11,6 +11,7 @@ public class Damage : MonoBehaviour
     bool hasHit;
     [SerializeField]
     float damage;
+    public bool triggerOnObject = true;
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -18,6 +19,7 @@ public class Damage : MonoBehaviour
         // Only deal damage to first valid target hit
         if (!hasHit)
         {
+            /*
             //  If colliding collider is a destructable, 
             //  start objects destroy animation, then disable damage object
             Destructable destructable = other.gameObject.GetComponent<Destructable>();
@@ -28,8 +30,20 @@ public class Damage : MonoBehaviour
                 gameObject.SetActive(false);
                 return;
             }
-
+            */
             //TODO: Check if target is damagable, if so, deal damage
+            if (triggerOnObject)
+            {
+                InteractOnDamage targetObject = other.GetComponent<InteractOnDamage>();
+                if (targetObject)
+                {
+                    return;
+                }
+            }
+            Character targetCharacter = GetComponent<Character>();
+            if(targetCharacter){
+                return;
+            }
         }
     }
 

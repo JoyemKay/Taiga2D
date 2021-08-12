@@ -10,7 +10,12 @@ public class Player : Character
     Vector2 interactOffset;
     public float interactDist;
     public bool canInteract = true;
-    bool hasStarted = false;
+    bool _interactCall;
+
+    public bool InteractCall { 
+        get { return _interactCall; }
+    }
+    bool hasStarted;
 
     public void Initiate(int floor)
     {
@@ -75,12 +80,33 @@ public class Player : Character
     protected override void Attack()
     {
         base.Attack();
+
+        if(!canAttack){
+            return;
+        }
         //  Only attack if able to
-        if (Input.GetButtonDown("Attack") && canAttack)
+        if (Input.GetButtonDown("Attack") && !onAttackCooldown)
         {
             SetState(State.attacking);
             SetAnimatorValue("attack");
             lastAttackTime = Time.time;
         }
+    }
+
+    protected override void Interact()
+    {
+        base.Interact();
+        if(!canInteract){
+            return;
+        }
+        if (Input.GetButtonDown("Interact"))
+        {
+            _interactCall = true;
+            return;
+        }
+        if(_interactCall){
+            _interactCall = false;
+        }
+
     }
 }

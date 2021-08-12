@@ -7,9 +7,10 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
 public class Interactable : MonoBehaviour
 {
-    Player player;
-    public UnityEvent activeEvent, disabledEvent;
-    public bool     active = true,                      // Determines if the Active or Disabled Event triggers on Interact.
+    [HideInInspector]
+    public Player player;
+    public UnityEvent activeEvent, inactiveEvent;
+    public bool     active = true,                      // Determines if the Active or Inactive Event triggers on Interact.
                     interactOnTriggerEnter,             // Should the Interact happen on the player entering trigger collider?
                     oneTime,                            // Should the Interact only be able to happen once
                     deactivateOnInteract,               // Should the Object be disabled on Interact?
@@ -23,7 +24,7 @@ public class Interactable : MonoBehaviour
         {
             if (playerInRange && player)
             {
-                if (Input.GetButtonDown("Interact") && player.canInteract)
+                if (player.InteractCall)
                 {
                     Interact();
                 }
@@ -51,9 +52,9 @@ public class Interactable : MonoBehaviour
 
         }
         //  Invoke disabledEvent if there are listerners registered
-        else if (disabledEvent.GetPersistentEventCount() > 0)
+        else if (inactiveEvent.GetPersistentEventCount() > 0)
         {
-            disabledEvent.Invoke();
+            inactiveEvent.Invoke();
         }
     }
 

@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3e5ffe06c14446393b7a04bba8d626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilemap: {fileID: 6171097570491722335}
   chapter: 00000000
 --- !u!1 &3621092626951759314
 GameObject:
@@ -270,10 +271,16 @@ PrefabInstance:
     - target: {fileID: 1016202690810994901, guid: d6d1029c75da943239cf92d482dc5d70,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6d1029c75da943239cf92d482dc5d70, type: 3}
+--- !u!1 &6171097570491722335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4057914888105376707, guid: d6d1029c75da943239cf92d482dc5d70,
+    type: 3}
+  m_PrefabInstance: {fileID: 7923160625296265628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6784590268343747867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3734342239281140871, guid: d6d1029c75da943239cf92d482dc5d70,

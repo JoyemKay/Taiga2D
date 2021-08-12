@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// Class used to spawn an item gamoObject to the scene
 public class ItemSpawner : MonoBehaviour
 {
     Item item;
@@ -48,6 +48,7 @@ public class ItemSpawner : MonoBehaviour
 
     IEnumerator CoSpawnItem(Item _item, Transform _transform){
         GameObject instantiatedItem = Instantiate(itemPrefab, _transform.position, _transform.rotation);
+        instantiatedItem.name = _item.itemName;
         ItemContainer itemContainer = instantiatedItem.GetComponent<ItemContainer>();
         itemContainer.item = _item;
         yield break;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Class that contains item information for item gameObject
 public class ItemContainer : MonoBehaviour
 {
     public Item item;
@@ -14,6 +15,8 @@ public class ItemContainer : MonoBehaviour
 
     public void Pickup(){
         // Pick up item to inventory
+        Debug.Log("Picking up "+gameObject.name);
+        //TODO: add item to player inventory or whatever
     }
 
 }

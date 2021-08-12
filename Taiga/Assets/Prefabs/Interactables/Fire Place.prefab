@@ -247,8 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e01808d518e4aa0945544327f99018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor: 0
-  interactableEvent:
+  player: {fileID: 0}
+  activeEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1735844119031275103}
@@ -264,15 +264,15 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  disabledEvent:
+  inactiveEvent:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   active: 1
+  interactOnTriggerEnter: 0
   oneTime: 0
   deactivateOnInteract: 0
-  playerInRange: 0
   interactableByPlayerInput: 1
 --- !u!58 &1735844120096714300
 CircleCollider2D:

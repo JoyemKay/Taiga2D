@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3459558489084602009}
   - component: {fileID: 1277667723540760927}
   - component: {fileID: 4780254629635938424}
-  - component: {fileID: 2146117722303728001}
+  - component: {fileID: 1015272198120261142}
+  - component: {fileID: 2405567287074232415}
   m_Layer: 0
   m_Name: Grassfield
   m_TagString: Untagged
@@ -133,12 +134,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c43292b25504635a26f17be0cf0421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wOparent: {fileID: 0}
+  id: 
+  floor: 0
+  gfxObject: {fileID: 0}
   resetable: 1
   hasBeenDisabled: 0
   offset: 0
   alternateSprites: []
---- !u!114 &2146117722303728001
+--- !u!114 &1015272198120261142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,14 +150,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 5140814357583749320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8deb37925c86e41b9acbe833d367451f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bc08767fd5d445878f694163daf537f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDestroyEvent:
+--- !u!114 &2405567287074232415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5140814357583749320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e01808d518e4aa0945544327f99018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  activeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1015272198120261142}
+        m_MethodName: DestroyOnInteract
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  inactiveEvent:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  active: 1
+  interactOnTriggerEnter: 0
+  oneTime: 0
+  deactivateOnInteract: 0
+  interactableByPlayerInput: 0
 --- !u!1 &8947234578071315615
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c43292b25504635a26f17be0cf0421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wOparent: {fileID: 0}
+  id: 
+  floor: 0
+  gfxObject: {fileID: 0}
   resetable: 1
   hasBeenDisabled: 0
   offset: -0.25

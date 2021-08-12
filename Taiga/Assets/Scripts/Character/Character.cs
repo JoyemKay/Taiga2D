@@ -7,20 +7,23 @@ public class Character : MonoBehaviour
 {
 
     State stateBeforePause;
-    protected State previousState;
+    public bool canAttack;
     public float moveSpeed, attackSpeed, offset;
     public GameObject gfx;
     public Transform target;
     public Vector2 lookDirection;
-    protected bool canAttack, canMove, hasMoved;
+    protected bool onAttackCooldown, canMove, hasMoved;
+    protected int currentFloor;
     protected float lastAttackTime;
     protected Rigidbody2D thisRigidbody;
     protected SpriteRenderer gfxRenderer;
     protected Animator gfxAnimator;
+
     [SerializeField]
     protected State state;
+    protected State previousState;
     GameObject attackObject;
-    protected int currentFloor;
+
 
     #region Inheritance functions with funcitonality in childrens
     protected virtual void Start()
@@ -48,6 +51,7 @@ public class Character : MonoBehaviour
             SetState(State.idle);
             Move();
             Attack();
+            Interact();
         }
         UpdateDepth();
         previousState = state;
@@ -65,7 +69,11 @@ public class Character : MonoBehaviour
     protected virtual void Attack()
     {
         //  Should be overwritten, only controls that attackspeed is passed by before allowing attack
-        canAttack = Time.time > lastAttackTime + attackSpeed;
+        onAttackCooldown = !(Time.time > lastAttackTime + attackSpeed);
+    }
+
+    protected virtual void Interact(){
+        
     }
 
     protected virtual void Pause()
@@ -77,6 +85,10 @@ public class Character : MonoBehaviour
     protected virtual void Resume()
     {
         state = stateBeforePause;
+    }
+
+    protected virtual void Die(){
+        
     }
 
     #endregion
@@ -169,6 +181,24 @@ public class Character : MonoBehaviour
         return currentFloor;
     }
 
+
+    public void TryStagger(float duration){
+        if(state != State.staggered){
+            StartCoroutine(StaggerCharacter(this,duration));
+        }
+    }
+
+    IEnumerator StaggerCharacter(Character character, float duration){
+        character.SetState(State.staggered);
+        float start = Time.time;
+        while(start + duration > Time.time){
+            yield return null;
+        }
+        if (character)
+        {
+            character.SetState(State.staggered);
+        }
+    }
 
     #region Astar-related scripts
     Vector3[] AstarPath;

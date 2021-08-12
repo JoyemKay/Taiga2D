@@ -9,13 +9,17 @@ using UnityEngine.Tilemaps;
 public class SetCollidersInvisible : MonoBehaviour
 {
     TilemapRenderer[] collisionRenderers;
-
+    bool renderersDisabled;
     void Start()
     {
-        collisionRenderers = GetComponentsInChildren<TilemapRenderer>();
-        for (int i = 0; i < collisionRenderers.Length; i++)
+        if (!renderersDisabled)
         {
-            if (collisionRenderers[i].gameObject.CompareTag("MapCollider")) { collisionRenderers[i].enabled = false; }
+            collisionRenderers = GetComponentsInChildren<TilemapRenderer>();
+            for (int i = 0; i < collisionRenderers.Length; i++)
+            {
+                if (collisionRenderers[i].gameObject.CompareTag("MapCollider")) { collisionRenderers[i].enabled = false; }
+            }
+            renderersDisabled = true;
         }
     }
 }

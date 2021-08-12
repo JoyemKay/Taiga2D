@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e01808d518e4aa0945544327f99018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableEvent:
+  activeEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5219066415480498598}
@@ -134,9 +134,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   active: 1
+  interactOnTriggerEnter: 0
   oneTime: 1
   deactivateOnInteract: 1
-  playerInRange: 0
   interactableByPlayerInput: 1
 --- !u!114 &5219066415480498598
 MonoBehaviour:
@@ -163,6 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c43292b25504635a26f17be0cf0421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  floor: 0
+  gfxObject: {fileID: 0}
+  resetable: 1
+  hasBeenDisabled: 0
   offset: 0
   alternateSprites: []
-  wOparent: {fileID: 0}

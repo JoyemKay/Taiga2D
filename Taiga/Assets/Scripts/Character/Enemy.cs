@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class Enemy : Character
 {
+    public UnityEvent onDeathEvent;
     //Unique identifier of the enemy, used by Chapters to make sure that !resetable enemies doesnt reset.
     public string id;
     //If this is false, the enemy can only be killed once, and wont reset in the chapter upon Scene reset.
@@ -21,6 +23,12 @@ public class Enemy : Character
     protected override void Update()
     {
         base.Update();
+    }
+
+    protected override void Die(){
+
+        onDeathEvent.Invoke();
+        base.Die();
     }
 
     //Only enables the Enemy game object if it is resettable or hasnt been killed.

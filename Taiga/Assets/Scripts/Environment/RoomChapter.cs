@@ -15,6 +15,7 @@ public class RoomChapter : MonoBehaviour
     WorldObject[] chapterObjects;
     WordlObjectSessionState[] chapterObjectsSessionState;
     Grid chapterGrid;
+    public GameObject tilemap;
 
     //Change in inspector to make room objects that is only active during a certain chapter. Can be multiple chapters in one chapter.
     public Chapter[] chapter;
@@ -23,7 +24,7 @@ public class RoomChapter : MonoBehaviour
     //If the chapters parent room is not the active room, deactivate the object or enemy.
     public void Setup()
     {
-        chapterGrid = GetComponentInChildren<Grid>();
+        //chapterGrid = GetComponentInChildren<Grid>();
         //Get all enemies in chapter, and disable the ones that are not resetable and has been disabled earlier.
         chapterEnemies = GetComponentsInChildren<Enemy>();
         if (chapterEnemySessionState != null && chapterEnemies != null)
@@ -76,7 +77,8 @@ public class RoomChapter : MonoBehaviour
     {
         if (ChapterIsActiveOrDefault())
         {
-            if (chapterGrid) { chapterGrid.enabled = true; }
+            //if (chapterGrid) { chapterGrid.enabled = true; }
+            tilemap.SetActive(true);
             for (int i = 0; i < chapterEnemies.Length; i++) { chapterEnemies[i].TrySetActive(); }
             for (int i = 0; i < chapterObjects.Length; i++) { chapterObjects[i].ResetPos(); }
         }
@@ -84,7 +86,8 @@ public class RoomChapter : MonoBehaviour
 
     public void DisableChapter()
     {
-        if (chapterGrid) { chapterGrid.enabled = false; }
+        //if (chapterGrid) { chapterGrid.enabled = false; }
+        tilemap.SetActive(false);
         for (int i = 0; i < chapterEnemies.Length; i++) { chapterEnemies[i].SetInactive(); }
         for (int i = 0; i < chapterObjects.Length; i++) { chapterObjects[i].gameObject.SetActive(false); }
     }
