@@ -25,10 +25,14 @@ public class InteractOnDamage : MonoBehaviour
         animator.enabled = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+   /* private void OnTriggerEnter2D(Collider2D other)
     {
         //TODO: Generalize to all damage (melee and projectile)
         if(other.gameObject.layer == LayerMask.NameToLayer("Player Damage"))    {interactable.Interact();   }
+    }*/
+
+    public void Interact(){
+        interactable.Interact();
     }
 
     public void DestroyOnInteract(){

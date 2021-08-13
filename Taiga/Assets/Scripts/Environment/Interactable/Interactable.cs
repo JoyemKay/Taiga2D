@@ -89,22 +89,20 @@ public class Interactable : MonoBehaviour
     public void ToggleActiveState(){
         active = !active;
     }
-    /*
-    public void SetActivated()
-    {
-        active = true;
-    }
 
-    public void SetDeactivated()
-    {
-        active = false;
-    }
-    */
     public void DeactivateOnInteract()
     {
         gameObject.SetActive(false);
     }
 
+
+    public void PauseTime(){
+        GameController.Instance.Pause();
+    }
+
+    public void ResumeTime(){
+        GameController.Instance.Resume();
+    }
 
     //  Mainly for debugging purpose, can be used to display a string to the Log
     public void DisplayDebug(string message)
