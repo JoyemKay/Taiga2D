@@ -95,15 +95,6 @@ public class Interactable : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-
-    public void PauseTime(){
-        GameController.Instance.Pause();
-    }
-
-    public void ResumeTime(){
-        GameController.Instance.Resume();
-    }
-
     //  Mainly for debugging purpose, can be used to display a string to the Log
     public void DisplayDebug(string message)
     {
