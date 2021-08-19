@@ -30,9 +30,14 @@ public class GameController : MonoBehaviour
     public bool SceneFinishedLoading{
         get { return _sceneFinishedLoading; }
     }
+    public string CachedSpawnLocation
+    {
+        set { _cachedSpawnLocation = value; }
+    }
 
     float currentTimeScale = 1, roomTransitionDelay = 4f;
     bool _isPaused, sceneInstantiated, _sceneFinishedLoading;
+    string _cachedSpawnLocation;
     static GameController _instance;
     UiController ui;
     SpawnLocation levelSpawnLocation;
@@ -204,17 +209,57 @@ public class GameController : MonoBehaviour
             Debug.Log("Found " + sceneRooms.Length + " rooms, calling setup...");
 
             levelSpawnLocation = null;
+            SpawnLocation defaultSpawn =null;
             for (int i = 0; i < sceneRooms.Length; i++)
             {
-                if (sceneRooms[i].isDefaultRoom) { levelSpawnLocation = sceneRooms[i].GetComponentInChildren<SpawnLocation>(); }
-                sceneRooms[i].Setup();
-            }
-            if (!levelSpawnLocation)
-            {
-                levelSpawnLocation = FindObjectOfType<SpawnLocation>();
                 if (!levelSpawnLocation)
                 {
-                    Debug.Log("WARNING: No active spawn location in scene, defaulting to bottom left corner.");
+                    if (sceneRooms[i].isDefaultRoom) {
+                        Debug.Log("Found default spawn location ...");
+                        defaultSpawn = sceneRooms[i].defaultSpawnLocation; 
+                    }
+                    if (_cachedSpawnLocation != null)
+                    {
+                        SpawnLocation[] spawnLocations = sceneRooms[i].gameObject.GetComponentsInChildren<SpawnLocation>();
+                        for (int j = 0; j < spawnLocations.Length; j++){
+                            if (spawnLocations[j].spawnName != null)
+                            {
+                                Debug.Log("Testing spawnName: " + spawnLocations[j].spawnName + " against cached string: " + _cachedSpawnLocation);
+                                if (spawnLocations[j].spawnName.Equals(_cachedSpawnLocation))
+                                {
+                                    Debug.Log("Found target spawn location from previous scene, initialising ...");
+                                    levelSpawnLocation = spawnLocations[j];
+                                    _cachedSpawnLocation = null;
+                                }
+                            }
+                        }
+                    }
+                }
+                sceneRooms[i].Setup();
+            }
+            if (_cachedSpawnLocation != null)
+            {
+                // If a target spawn location was transfered from previous scene, but not found in any Room, reset and call out.
+                Debug.Log("Target spawn location was not found in scene, reverting to default ...");
+                _cachedSpawnLocation = null;
+            }
+
+            if (!levelSpawnLocation)
+            {
+
+                if(defaultSpawn){
+                    Debug.Log("Spawing at default spawn position ...");
+                    levelSpawnLocation = defaultSpawn;
+                }
+                if (!levelSpawnLocation)
+                {
+                    Debug.Log("No default spawn point found, searching for first available spawn point...");
+                    levelSpawnLocation = FindObjectOfType<SpawnLocation>();
+
+                    if (!levelSpawnLocation)
+                    {
+                        Debug.Log("WARNING: No active spawn location in scene, defaulting to bottom left corner.");
+                    }
                 }
             }
             sceneInstantiated = true;

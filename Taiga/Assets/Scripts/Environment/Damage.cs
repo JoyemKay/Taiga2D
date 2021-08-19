@@ -16,9 +16,11 @@ public class Damage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         // Only deal damage to first valid target hit
         if (!hasHit)
         {
+            Debug.Log("Damage object on " + transform.parent.name + " has interacted with "+other.name);
             /* DEPRECATED
             //  If colliding collider is a destructable, 
             //  start objects destroy animation, then disable damage object
@@ -39,6 +41,7 @@ public class Damage : MonoBehaviour
                 InteractOnDamage targetObject = other.GetComponent<InteractOnDamage>();
                 if (targetObject)
                 {
+                    Debug.Log("Hit destructable: " + other.name);
                     targetObject.Interact();
                     if (oneTime) { hasHit = true; }
                     return;
@@ -46,12 +49,37 @@ public class Damage : MonoBehaviour
             }
 
             //Damage target character
-            Character targetCharacter = GetComponent<Character>();
+            Character targetCharacter = other.GetComponent<Character>();
             if(targetCharacter){
+                Debug.Log("Hit character: " + other.name);
+                DoDamage(targetCharacter);
                 if (oneTime) { hasHit = true; }
                 return;
             }
         }
+    }
+
+    void DoDamage(Character character){
+        //Do something
+    }
+
+    public void EnableAttack()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void DisableAttack()
+    {
+        gameObject.SetActive(false);
+    }
+
+    //  Resets the hasHit variable when object is enabled   
+    private void OnEnable()
+    {
+        hasHit = false;
+        //  DEBBUGING ONLY, state should be set in animator
+        //  USE Character.DisableAttack()
+        //  StartCoroutine(DelayActive());
     }
 
     // Used for debugging only, attacks are handled in animator
@@ -64,13 +92,8 @@ public class Damage : MonoBehaviour
         }
     }
 
-    //  Resets the hasHit variable when object is enabled
-    //      
-    private void OnEnable()
-    {
-        hasHit = false;
-        //DEBBUGING ONLY, state should be set in animator
-        StartCoroutine(DelayActive());
-    }
+
+
+
 
 }

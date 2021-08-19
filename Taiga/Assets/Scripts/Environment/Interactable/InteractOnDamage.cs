@@ -8,6 +8,7 @@ public class InteractOnDamage : MonoBehaviour
     Interactable interactable;
     Animator animator;
     Collider2D blockingCollider;
+    bool initiaded = false;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class InteractOnDamage : MonoBehaviour
             }
         }
         animator.enabled = false;
+        initiaded = true;
     }
 
    /* private void OnTriggerEnter2D(Collider2D other)
@@ -49,6 +51,9 @@ public class InteractOnDamage : MonoBehaviour
 
     private void OnEnable()
     {
+        if(!initiaded){
+            Start();
+        }
         animator.enabled = false;
         blockingCollider.enabled = true;
     }

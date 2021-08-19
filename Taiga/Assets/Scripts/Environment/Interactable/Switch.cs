@@ -28,4 +28,8 @@ public class Switch : MonoBehaviour
         switchAnimator = GetComponent<Animator>();
         switchAnimator.SetBool("switch", switchActive);
     }
+
+    public void TriggerSwitch(){
+        switchAnimator.SetTrigger("switch");
+    }
 }

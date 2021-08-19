@@ -5,9 +5,11 @@ using UnityEngine.Events;
 
 public class TimedToggle : MonoBehaviour
 {
-    public float delayTime;
+    public float    countdown,          // Time in seconds until event is invoked after timer start 
+                    onActiveDelay;      // Time in seconds until event is invoked after gameObject active
     public UnityEvent toggleEvent;
-    public bool manualActivate;
+    public bool manualActivate,         // Should the timed event be triggered on gameObject active?
+                oneTime;                // Is the timer used only once?
     bool active;
     float timer;
 
@@ -15,19 +17,27 @@ public class TimedToggle : MonoBehaviour
     {
         if(manualActivate && !active){
             manualActivate = false;
-            StartTimer();
+            StartCoroutine(Wait(onActiveDelay));
         }
         if (active)
         {
             timer += Time.deltaTime;
-            if (timer > delayTime)  {ActivateToggle();  }
+            if (timer > countdown)  {ActivateToggle();  }
         }
+    }
+
+    IEnumerator Wait(float time){
+        yield return new WaitForSeconds(time);
+        ActivateToggle();
     }
 
     public void ActivateToggle()
     {
         toggleEvent.Invoke();
-        gameObject.SetActive(false);
+        if (oneTime)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void StartTimer()

@@ -11,6 +11,7 @@ public class Room : MonoBehaviour
     public bool isActiveRoom, isDefaultRoom = false;
     public string id, roomName;
     public bool displayRoomName;
+    public SpawnLocation defaultSpawnLocation;
     [HideInInspector]
     public BoxCollider2D roomCollider;
     RoomChapter[] roomChapters;

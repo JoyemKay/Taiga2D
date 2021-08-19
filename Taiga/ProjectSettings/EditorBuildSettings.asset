@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sandbox.unity
     guid: c7f64625304444ec2bbe4e60a53a7b64
+  - enabled: 1
+    path: Assets/Scenes/POC-Wilderness.unity
+    guid: dc1ee88cf15ce413ab2775d74a3ba793
+  - enabled: 1
+    path: Assets/Scenes/POC-Dungeon01.unity
+    guid: ada97fef991f8468ebeaf1c1688b12b4
   m_configObjects: {}

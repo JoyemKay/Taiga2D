@@ -7,6 +7,7 @@ public class SpawnLocation : MonoBehaviour
     SpriteRenderer thisRenderer;
     public int floor;
     public Direction lookDirection;
+    public string spawnName;
 
     private void Awake()
     {

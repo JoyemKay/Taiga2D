@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected State state;
     protected State previousState;
-    GameObject attackObject;
+    Damage attackObject;
 
 
     #region Inheritance functions with funcitonality in childrens
@@ -35,8 +35,8 @@ public class Character : MonoBehaviour
         UpdateDepth();
         if (GetComponentInChildren<Damage>())
         {
-            attackObject = GetComponentInChildren<Damage>().gameObject;
-            attackObject.SetActive(false);
+            attackObject = GetComponentInChildren<Damage>();
+            attackObject.DisableAttack();
         }
     }
 
@@ -147,7 +147,7 @@ public class Character : MonoBehaviour
     {
         if (attackObject)
         {
-            attackObject.SetActive(true);
+            attackObject.EnableAttack();
         }
     }
 
@@ -156,7 +156,7 @@ public class Character : MonoBehaviour
     {
         if (attackObject)
         {
-            attackObject.SetActive(false);
+            attackObject.DisableAttack();
         }
     }
     //  Sets the correct z-pos based on the current y-pos (for pseudo-3D depth)
