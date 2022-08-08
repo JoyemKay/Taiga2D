@@ -6,17 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        h2{
-            margin-left: 20px;
+        div{
+            margin-left:20px;
         }
-        h3{
-            margin-left: 40px;
+        to-do{
+            background-color: lightgreen;
         }
-        h4{
-            margin-left: 60px;
+        list-item{
+            font-weight: bold;
         }
-        p{
-            margin-left: 80px;
+        .content{
+            background-color: slategrey;
+            padding-bottom: 0.25em;
+        }
+        .content-item, .content-type{
+            background-color: lightgrey;
         }
     </style>
 </head>
@@ -28,36 +32,135 @@
     h4 - Content subcontent (eg. class functions)
     p  - Content description
     -->
+    <div class="content-type">
+        <h1>General TODO-list</h1>
+        <p>List of unspecific things to do at the moment, and in the future.</p>
+        <div>
+            <!--
+                Example:
+            <p><list-item>Name: </list-item>description.</p>
+            -->
+            <p><list-item>Update character lookDirection : </list-item>While a character is A*-moving, the look direction should be updated with the movePos.</p>
+            <p><list-item>Update idle lookDirection : </list-item>While idle, lookDirection should be randomly updated for a more living impression. Should be a character-level method.</p>
+        </div>
+    </div>
 
-    <h1>Scripts</h1>
-        <h2>Character</h2>
-            <h3>Character.cs</h3>
+    <div class="content-type">
+        <h1>Scripts</h1>
+        <p>C# game script files.</p>
+
+        <div class="content">
+            <h2>Character</h2>
+            <p>Folder for scripts controlling Character and child objects.</p>
+
+            <div class="content-item">
+                <h3>Character.cs</h3>
                 <p>Parent class for all controllable objects in the game, like the player(s), NPC and enemy objects.</p>
-                <h4>Inheritance functions</h4>
-                <p>Functions meant to be overwritten with child-class specific functions. Might contain shared functionality.</p>
-                <h4>Start()</h4>
-                <p>Sets up character object with its Animator and Renderer for graphics, and rigidbody for collision detection.</p>
-                <p>If the character has a Damage component as child, link the object as attackObject and then disables it.</p>
-                <h4>Update()</h4>
-                <p></p>
-                <h4>Move()</h4>
-                <p></p>
-                <h4>Attack()</h4>
-                <p></p>
-                <h4>Interact()</h4>
-                <p></p>
-                <h4>Pause()</h4>
-                <p></p>
-                <h4>Resume()</h4>
-                <p></p>
-                <h4>Die()</h4>
-                <p></p>
-        <h2>Editor</h2>
-        <h2>Environment</h2>
-        <h2>Game Management</h2>
-        <h2>Item</h2>
-        <h2>UI</h2>
-        <h2>a*</h2>
-        <p>Code concerning a*-movement om characters, adapted from Sebastian Lagues <a href="https://www.youtube.com/watch?v=-L-WgKMFuhE&list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW&ab_channel=SebastianLague">tutorial</a>.</p>        
+                <div>
+
+                    <h4>Properties</h4>
+                    <p>Shared properties in the parent class.</p>
+                    <div>
+                        <h4>public</h4>
+                        <div>
+                            <p><list-item>State stateBeforePause :</list-item> Saves the objects state before a pause is called.</p>
+                            <p><list-item>bool canAttack :</list-item> 'true' if the character should be able to use overwritten Attack() <to-do>(should be protected, not public)</to-do>.</p>
+                            <p><list-item>float moveSpeed ;</list-item> The characters move-speed, in grids/second.</p>
+                            <p><list-item>float attackSpeed ;</list-item> The characters attack-speed, in seconds/attack.</p>
+                            <p><list-item>float offset ;</list-item> offset position between gameobject position and pseudo-3D-ground position of sprite.</p>
+                            <p><list-item>GameObject gfx ;</list-item> Child object containing graphics of the character.</p>
+                            <p><list-item>Transform target ;</list-item> position of target gameObject.</p>
+                            <p><list-item>Vector2 lookDirection ;</list-item> The characters attack-speed, in seconds/attack.</p>
+                        </div>
+                        <h4>protected</h4>
+                        <div>
+                            <p><list-item>bool onAttackCooldown ;</list-item> if the character is on attack cooldown, i.e, can't trigger an attack until cooldown is reached.</p>
+                            <p><list-item>bool canMove ;</list-item> 'true' if the character should be able to move with overwritten Move() or other moving method.</p>
+                            <p><list-item>bool hasMoved ;</list-item> 'true' if the character has moved in the current frame <to-do>(currently only used in MoveTo(), should be set as 'false' at start of Move(), and 'true' in any move-related method)</to-do>.</p>
+                            <p><list-item>int currentFloor ;</list-item> Used for pseudo-3D to determine how high in the world the character is (0 is ground-floor, changed by SetFloor()).</p>
+                            <p><list-item>float lastAttackTime ;</list-item> in-game timestamp when last time a sucessful attack-call was triggered.</p>
+                            <p><list-item>Rigidbody2D thisRigidbody ;</list-item> character rigidbody, used for movement and collision checks.</p>
+                            <p><list-item>SpriteRenderer gfxRenderer ;</list-item> renderer in child object gfx, displays character sprites.</p>
+                            <p><list-item>Animator gfxAnimator ;</list-item> character animator, controlled in editor.</p>
+                        </div>
+                    </div>
+
+                    <h4>Inheritance methods</h4>
+                    <p>Methods meant to be overwritten with child-class specific methods. Might contain shared functionality.</p>
+                    <div>
+                        <h4>Start()</h4>
+                        <p>Sets up character object with its Animator and Renderer for graphics, and rigidbody for collision detection.</p>
+                        <p>If the character has a Damage component as child, link the object as attackObject and then disables it.</p>
+                        <h4>Update()</h4>
+                        <p>Pauses and unpauses character state depending on GameController bool isPaused.</p>
+                        <p>Runs Move(), Attack() and Interact() if allowed.</p>
+                        <p>Updates z-position of sprites with UpdateDepth().</p>
+                        <h4>Move()</h4>
+                        <p></p>
+                        <p><to-do>TODO: set conditions for canMove = false (state.staggered should unable movement.)</to-do></p>
+                        <h4>Attack()</h4>
+                        <p></p>
+                        <h4>Interact()</h4>
+                        <p></p>
+                        <h4>Pause()</h4>
+                        <p></p>
+                        <h4>Resume()</h4>
+                        <p></p>
+                        <h4>Die()</h4>
+                        <p></p>
+                    </div>
+                    <h4>Shared methods</h4>
+                    <p>General functionality methods, not overwritable.</p>
+                    <div>
+                    </div>
+                    <h4>A*-related methods and properties.</h4>
+                    <p>Controls object behaviour with the A*-grid.</p>
+                    <div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-item">
+                <h3>Enemy.cs</h3>
+                <p>Enemy child-class of character.cs.</p>
+            </div>
+
+            <div class="content-item">
+                <h3>Player.cs</h3>
+                <p>Player child-class of character.cs.</p>
+            </div>
+        </div>
+
+
+        <div class="content">
+            <h2>Editor</h2>
+        </div>
+
+        <div class="content">
+            <h2>Environment</h2>
+        </div>
+        <div class="content">
+            <h2>Game Management</h2>
+        </div>
+        <div class="content">
+            <h2>Item</h2>
+        </div>
+        <div class="content">
+            <h2>UI</h2>
+        </div>
+        <div class="content">
+            <h2>a*</h2>
+            <p>
+                Code concerning a*-movement om characters, adapted from Sebastian Lagues
+                <a href="https://www.youtube.com/watch?v=-L-WgKMFuhE&list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW&ab_channel=SebastianLague">tutorial</a>.
+            </p>
+        </div>
+    </div>
+
+    <div class="content-type">
+        <h1>Scriptable Objects</h1>
+        <p>Scriptable objects classes for containing information and states.</p>
+    </div>
+
 </body>
-</html>
+    </html>
