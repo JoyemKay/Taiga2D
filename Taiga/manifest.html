@@ -1,5 +1,63 @@
-// Manifest file for game project taiga2D
+<!DOCTYPE html>
+<!-- Manifest file for game project taiga2D -->
 <html>
+<head>
+    <title>Manifest file for project Taiga2D</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h2{
+            margin-left: 20px;
+        }
+        h3{
+            margin-left: 40px;
+        }
+        h4{
+            margin-left: 60px;
+        }
+        p{
+            margin-left: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Text hierarchy as follows:
+    h1 - Content type
+    h2 - Content subgroup
+    h3 - Content
+    h4 - Content subcontent (eg. class functions)
+    p  - Content description
+    -->
 
-
+    <h1>Scripts</h1>
+        <h2>Character</h2>
+            <h3>Character.cs</h3>
+                <p>Parent class for all controllable objects in the game, like the player(s), NPC and enemy objects.</p>
+                <h4>Inheritance functions</h4>
+                <p>Functions meant to be overwritten with child-class specific functions. Might contain shared functionality.</p>
+                <h4>Start()</h4>
+                <p>Sets up character object with its Animator and Renderer for graphics, and rigidbody for collision detection.</p>
+                <p>If the character has a Damage component as child, link the object as attackObject and then disables it.</p>
+                <h4>Update()</h4>
+                <p></p>
+                <h4>Move()</h4>
+                <p></p>
+                <h4>Attack()</h4>
+                <p></p>
+                <h4>Interact()</h4>
+                <p></p>
+                <h4>Pause()</h4>
+                <p></p>
+                <h4>Resume()</h4>
+                <p></p>
+                <h4>Die()</h4>
+                <p></p>
+        <h2>Editor</h2>
+        <h2>Environment</h2>
+        <h2>Game Management</h2>
+        <h2>Item</h2>
+        <h2>UI</h2>
+        <h2>a*</h2>
+        <p>Code concerning a*-movement om characters, adapted from Sebastian Lagues <a href="https://www.youtube.com/watch?v=-L-WgKMFuhE&list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW&ab_channel=SebastianLague">tutorial</a>.</p>        
+</body>
 </html>
