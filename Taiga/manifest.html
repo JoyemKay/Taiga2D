@@ -23,6 +23,9 @@
             background-color: lightgrey;
             padding-bottom: 0.25em;
         }
+        deprecated-item{
+            background-color: orangered;
+        }
     </style>
 </head>
 <body>
@@ -69,7 +72,7 @@
                         <h4>public</h4>
                         <div>
                             <p><list-item>State stateBeforePause :</list-item> Saves the objects state before a pause is called.</p>
-                            <p><list-item>bool canAttack :</list-item> 'true' if the character should be able to use overwritten Attack() <to-do>(should be protected, not public)</to-do>.</p>
+                            <p><list-item>bool canAttack :</list-item> 'true' if the character should be able to use overwritten Attack() <to-do>(should be protected, not public. Make method CanAttack(), property is changed in SetPlayerCanAttack().)</to-do>.</p>
                             <p><list-item>float moveSpeed :</list-item> The characters move-speed, in grids/second.</p>
                             <p><list-item>float attackSpeed :</list-item> The characters attack-speed, in seconds/attack.</p>
                             <p><list-item>float offset :</list-item> offset position between gameobject position and pseudo-3D-ground position of sprite.</p>
@@ -235,7 +238,7 @@
                     <div>
                         <h4>TrySetActive()</h4>
                         <p>Reactivates the enemy at it's current position if resetable or isAlive is true.</p>
-                        <p><to-do>Should reset to start position, which currently is not saved or stored. Likewise for stats like hp etc.</to-do></p>                        
+                        <p><to-do>Should reset to start position, which currently is not saved or stored. Likewise for stats like hp etc. See WorldObject.ResetPos()</to-do></p>                        
                     
                         <h4>SetInactive()</h4>
                         <p>Deactivates gameobject and stops any current movement via Astar.</p>
@@ -306,7 +309,233 @@
 
         <div class="content">
             <h2>Environment</h2>
+            <p>Scripts that handles environmental objects, like Interactables, WorldObjects and room and floor management.</p>
+            <div>
+                <h3>Interactables</h3>
+                <p>Gameobjects that can be interacted with by colliding or Interact(), or by Events.</p>
+                <div class="content-item">
+                    <h4>Interactable.cs</h4>
+                    <p>Makes objects interactable by player or by Events</p>
+                    <p>Requires a Collider2D to interact with player interactCollider(trigger)</p>
+                    <div>
+                        <h4>Properties</h4>
+                        <div>
+                            <h4>public</h4>
+                            <div>
+                                <p><list-item>Player player :</list-item> The player object currently able to interact with object.</p>
+                                <p><list-item>UnityEvent activeEvent :</list-item> The event (if any) triggered on interact if active is 'true'.</p>
+                                <p><list-item>UnityEvent inactiveEvent :</list-item> The event (if any) triggered on interact if active is 'false'.</p>
+                                <p><list-item>bool active :</list-item> determines which Events triggers on interact.<to-do>(consider changing name to something else to not confuse for active state of gameObject)</to-do></p>
+                                <p><list-item>bool interactOnTriggerEnter :</list-item> if 'true' triggers the event on player.interactCollider entering interactable collider.</p>
+                                <p><list-item>bool oneTime :</list-item> if 'true' triggers event only one time, then cant be interacted with again in the current scene.</p>
+                                <p><list-item>bool deactivateOnInteract :</list-item> if 'true' the interactable deactivates after interaction.</p>
+                                <p><list-item>bool interactableByPlayerInput :</list-item> if 'true' enables the player to interact with the object using Interact() (Standard value is 'true').</p>
+                            </div>
+                            <h4>private</h4>
+                            <div>
+                                <p><list-item>bool hasInteracted :</list-item> 'true' if the object has been interacted with (if 'true' and oneTime also 'true', object can't be interacted with again).</p>
+                                <p><list-item>bool playerInRange :</list-item> 'true' if player.interactCollider is within objects collider.</p> 
+                            </div>
+                        </div>
+                        <h4>Methods</h4>
+                        <div>
+                            <h4>Update()</h4>
+                            <p>Checks if player is within range and interacting, if allowed, triggers Interact().</p>
+
+                            <h4>Interact()</h4>
+                            <p>Triggers the Events listed in editor depending on state and if can interact multiple times.</p>
+
+                            <h4>OnTriggerEnter2D()</h4>
+                            <p>Checks if the trigger that entered collider is player.interactCollider, if so, player is in range.</p>
+                            <p>If interactOnTriggerEnter is 'true', trigger Interact().</p>
+
+                            <h4>OnTriggerExit2D()</h4>
+                            <p>If the player.interactCollider exits the interacable, null player and set playerInRange to 'false'.</p>
+
+                            <h4>ToggleActiveState()</h4>
+                            <p>Flips bool actives value.</p>
+
+                            <h4>deactivateOnInteract()</h4>
+                            <p>Sets the gameObject to false.</p>
+
+                            <h4>DisplayDebug()</h4>
+                            <p>Function for displaying message in Debug Log.</p>
+                        </div>
+                    </div>
+                </div>   
+                <div class="content-item">
+                    <h4>InteractOnDamage.cs</h4>
+                    <p><list-item>Requirements :</list-item> Interactable, WorldObject, non triggering Collider2D.</p>            
+                    <p>Triggers an Interactable component to Interact upon triggered by Damage object.</p>
+                    <p>Interact is called from Damage object.</p>
+                    <div>
+                        <h4>Properties</h4>
+                        <div>
+                            <h4>public</h4>
+                            <div>
+
+                            </div>
+                            <h4>private</h4>
+                            <div>
+                                <p><list-item>Interactable interactable :</list-item> the interactable object that is triggered upon Damage triggering this object.</p>
+                                <p><list-item>Animator animator :</list-item> animator that plays 'destroy' animation when DestroyOnInteract() is called.</p> 
+                                <p><list-item>Collider2D blockingCollider :</list-item> The collider on the game object that is not a trigger. </p> 
+                                <p><list-item>bool initiated :</list-item> 'true' if component has been initiated. To make sure that Start() runs before any other method.</p> 
+                            </div>
+                        </div>
+                        <h4>Methods</h4>
+                        <div>
+                            <h4>Start()</h4>
+                            <p>Assigns the objects Interactable component if not done in editor. Finds the not triggering collider on the object.</p>
+
+                            <h4>Interact()</h4>
+                            <p>Calls interactable.Interact().</p>
+
+                            <h4>DestroyOnInteract()</h4>
+                            <p>When called, plays destruction animation and disables the non triggering collider.</p>
+
+                            <h4>Destroy()</h4>
+                            <p>Calls DisableWorldObject() on WorldObject component.</p>
+
+                            <h4>OnEnable()</h4>
+                            <p>Makes sure that Start() runs before any other method.</p>
+
+                        </div>
+                    </div>
+                </div> 
+                <div class="content-item">
+                    <h4>SetGameTime.cs</h4>        
+                    <p>Methods for pausing and resuming game via GameController.</p>
+
+                    <div>
+                        <h4>Properties</h4>
+                        <div>
+                            <h4>public</h4>
+                            <div>
+
+                            </div>
+                            <h4>private</h4>
+                            <div>
+
+                            </div>
+                        </div>
+                        <h4>Methods</h4>
+                        <div>
+                            <h4>Pause()</h4>
+                            <p>Pauses gametime.</p>
+
+                            <h4>Resume()</h4>
+                            <p>Resumes gametime.</p>
+                        </div>
+                    </div>
+                </div> 
+                <div class="content-item">
+                    <h4>SetPlayerCanAttack.cs</h4>        
+                    <p>Toggles player.canAttack with bool value.</p>
+
+                    <div>
+                        <h4>Properties</h4>
+                        <div>
+                            <h4>public</h4>
+                            <div>
+
+                            </div>
+                            <h4>private</h4>
+                            <div>
+
+                            </div>
+                        </div>
+                        <h4>Methods</h4>
+                        <div>
+                            <h4>SetCanAttack()</h4>
+                            <p>Sets player.canAttack to bool state.</p>
+                            <p><to-do>Should call player.CanAttack(state), so that bool canAttack can be protected.</to-do></p>
+                        </div>
+                    </div>
+                </div> 
+                <div class="content-item">
+                    <h4>Switch.cs</h4>  
+                    <p><list-item>Requirements :</list-item> Animator on same gameObject.</p>        
+                    <p>Methods for triggering an animation or switch between two animations via animator.</p>
+                    <p><to-do>Check if trigger is enough to change between two (or more) animations.</to-do></p>
+
+                    <div>
+                        <h4>Properties</h4>
+                        <div>
+                            <h4>public</h4>
+                            <div>
+                                <p><list-item>bool switchActive :</list-item> determines which animation is active when OnEnable() is called.</p>  
+                            </div>
+                            <h4>private</h4>
+                            <div>
+                                <p><list-item>Animator switchAnimator :</list-item> determines which animation is active when OnEnable() is called.</p> 
+                            </div>
+                        </div>
+                        <h4>Methods</h4>
+                        <div>
+                            <h4>ToggleSwitch()</h4>
+                            <p>Flips value on switchActive and sends to animator.</p>
+                            <p><to-do>Flip order on lines in method for readability.</to-do></p>
+
+                            <h4>OnEnable()</h4>
+                            <p>Finds the animator, starts animation corresponding to bool value of switchActive.</p>
+
+                            <h4>TriggerSwitch()</h4>
+                            <p>Triggers switch on animator.</p>
+
+                        </div>
+                    </div>
+                </div> 
+
+                <div class="content-item">
+                    <h4>TimedToggle.cs</h4>  
+                    <p><list-item>Requirements :</list-item> Animator on same gameObject.</p>        
+                    <p>Methods for triggering an animation or switch between two animations via animator.</p>
+                    <p><to-do>Check if trigger is enough to change between two (or more) animations.</to-do></p>
+                    <p><to-do>There should be a StopTimer() method that sets active to 'false' and timer to '0'.</to-do></p>
+
+                    <div>
+                        <h4>Properties</h4>
+                        <div>
+                            <h4>public</h4>
+                            <div>
+                                <p><list-item>float countdown :</list-item> how many seconds from when StartTimer() is called until event triggers.</p>  
+                                <p><list-item>float onActiveDelay :</list-item> how many seconds from object activates until event triggers. Only when manualActivate is 'true'.</p>  
+                                <p><list-item>UnityEvent toggleEvent :</list-item> What event should trigger when timer has reached countdown.</p>  
+                                <p><list-item>bool manualActivate :</list-item> 'true' if event should trigger onActiveDelay seconds after enabled.</p>  
+                                <p><list-item>bool oneTime :</list-item> 'true' if event only should trigger one time.</p>  
+                            </div>
+                            <h4>private</h4>
+                            <div>
+                                <p><list-item>bool active :</list-item> 'true' if the timer is active.</p> 
+                                <p><list-item>float timer :</list-item> internal timer variable.</p> 
+                            </div>
+                        </div>
+                        <h4>Methods</h4>
+                        <div>
+                            <h4>Update()</h4>
+                            <p>Triggers event after onActiveDelay seconds if manualActivate is 'true'.</p>
+                            <p><to-do>Flip order on lines in method for readability.</to-do></p>
+
+                            <h4>Wait()</h4>
+                            <p>Waits 'time' seconds, then runs ActivateToggle().</p>
+
+                            <h4>ActivateToggle()</h4>
+                            <p>Triggers the event. If oneTime is 'true' disables gameObject.</p>
+                            <p><to-do>Should only disable component, or should the timer be a seperate child on the component that event triggers on?</to-do></p>
+                            <p><to-do>If recurring, timer should be set to '0' after event is triggered. active status should also be set to 'true' if not. Otherway, recurring events will never trigger from manualActivate.</to-do></p>
+
+                            <h4>StartTimer()</h4>
+                            <p>Resets timer and sets active to 'true'.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
         </div>
+
+
         <div class="content">
             <h2>Game Management</h2>
         </div>
