@@ -10,7 +10,7 @@
             margin-left:20px;
         }
         to-do{
-            background-color: lightgreen;
+            background-color: lightgreen; 
         }
         list-item{
             font-weight: bold;
@@ -21,6 +21,7 @@
         }
         .content-item, .content-type{
             background-color: lightgrey;
+            padding-bottom: 0.25em;
         }
     </style>
 </head>
@@ -42,6 +43,10 @@
             -->
             <p><list-item>Update character lookDirection : </list-item>While a character is A*-moving, the look direction should be updated with the movePos.</p>
             <p><list-item>Update idle lookDirection : </list-item>While idle, lookDirection should be randomly updated for a more living impression. Should be a character-level method.</p>
+            <p><list-item>Add state dead :</list-item> characters should be able to stay in scene after Die() is called, eg. if the character has a death-sprite (or is able to be interacted on after death).</p>
+            <p><list-item>Add run/walk speed : </list-item>characters should be able to toggle run and walk, movespeed should be able to be changed between these two.</p>
+            <p><list-item>Add character/enemy/player scriptable object : </list-item>Stats should be imported from specific SO per enemy type and unique enemies.</p>
+        
         </div>
     </div>
 
@@ -65,23 +70,26 @@
                         <div>
                             <p><list-item>State stateBeforePause :</list-item> Saves the objects state before a pause is called.</p>
                             <p><list-item>bool canAttack :</list-item> 'true' if the character should be able to use overwritten Attack() <to-do>(should be protected, not public)</to-do>.</p>
-                            <p><list-item>float moveSpeed ;</list-item> The characters move-speed, in grids/second.</p>
-                            <p><list-item>float attackSpeed ;</list-item> The characters attack-speed, in seconds/attack.</p>
-                            <p><list-item>float offset ;</list-item> offset position between gameobject position and pseudo-3D-ground position of sprite.</p>
-                            <p><list-item>GameObject gfx ;</list-item> Child object containing graphics of the character.</p>
-                            <p><list-item>Transform target ;</list-item> position of target gameObject.</p>
-                            <p><list-item>Vector2 lookDirection ;</list-item> The characters attack-speed, in seconds/attack.</p>
+                            <p><list-item>float moveSpeed :</list-item> The characters move-speed, in grids/second.</p>
+                            <p><list-item>float attackSpeed :</list-item> The characters attack-speed, in seconds/attack.</p>
+                            <p><list-item>float offset :</list-item> offset position between gameobject position and pseudo-3D-ground position of sprite.</p>
+                            <p><list-item>GameObject gfx :</list-item> Child object containing graphics of the character.</p>
+                            <p><list-item>Transform target :</list-item> position of target gameObject.</p>
+                            <p><list-item>Vector2 lookDirection :</list-item> Normalized Vector2 of where the character is facing.</p>
                         </div>
                         <h4>protected</h4>
                         <div>
-                            <p><list-item>bool onAttackCooldown ;</list-item> if the character is on attack cooldown, i.e, can't trigger an attack until cooldown is reached.</p>
-                            <p><list-item>bool canMove ;</list-item> 'true' if the character should be able to move with overwritten Move() or other moving method.</p>
-                            <p><list-item>bool hasMoved ;</list-item> 'true' if the character has moved in the current frame <to-do>(currently only used in MoveTo(), should be set as 'false' at start of Move(), and 'true' in any move-related method)</to-do>.</p>
-                            <p><list-item>int currentFloor ;</list-item> Used for pseudo-3D to determine how high in the world the character is (0 is ground-floor, changed by SetFloor()).</p>
-                            <p><list-item>float lastAttackTime ;</list-item> in-game timestamp when last time a sucessful attack-call was triggered.</p>
-                            <p><list-item>Rigidbody2D thisRigidbody ;</list-item> character rigidbody, used for movement and collision checks.</p>
-                            <p><list-item>SpriteRenderer gfxRenderer ;</list-item> renderer in child object gfx, displays character sprites.</p>
-                            <p><list-item>Animator gfxAnimator ;</list-item> character animator, controlled in editor.</p>
+                            <p><list-item>bool onAttackCooldown :</list-item> if the character is on attack cooldown, i.e, can't trigger an attack until cooldown is reached.</p>
+                            <p><list-item>bool canMove :</list-item> 'true' if the character should be able to move by controller input or other direct action.</p>
+                            <p><list-item>bool hasMoved :</list-item> 'true' if the character has moved in the current frame <to-do>(currently only used in MoveTo(), should be set as 'false' at start of Move(), and 'true' in any move-related method)</to-do>.</p>
+                            <p><list-item>int currentFloor :</list-item> Used for pseudo-3D to determine how high in the world the character is (0 is ground-floor, changed by SetFloor()).</p>
+                            <p><list-item>float lastAttackTime :</list-item> in-game timestamp when last time a sucessful attack-call was triggered.</p>
+                            <p><list-item>Rigidbody2D thisRigidbody :</list-item> character rigidbody, used for movement and collision checks.</p>
+                            <p><list-item>SpriteRenderer gfxRenderer :</list-item> renderer in child object gfx, displays character sprites.</p>
+                            <p><list-item>Animator gfxAnimator :</list-item> character animator, controlled in editor.</p>
+                            <p><list-item>State state :</list-item> the characters current state, see shared enums for available states.</p>
+                            <p><list-item>State previousState :</list-item> last frames state.</p>
+                            <p><list-item>Damage attackObject :</list-item> the characters Damage object, used for triggering damage from character.</p>
                         </div>
                     </div>
 
@@ -91,31 +99,99 @@
                         <h4>Start()</h4>
                         <p>Sets up character object with its Animator and Renderer for graphics, and rigidbody for collision detection.</p>
                         <p>If the character has a Damage component as child, link the object as attackObject and then disables it.</p>
+                        
                         <h4>Update()</h4>
-                        <p>Pauses and unpauses character state depending on GameController bool isPaused.</p>
+                        <p>Pauses and unpauses character state depending on GameController bool isPaused and characters current state.</p>
                         <p>Runs Move(), Attack() and Interact() if allowed.</p>
                         <p>Updates z-position of sprites with UpdateDepth().</p>
+                        
                         <h4>Move()</h4>
-                        <p></p>
-                        <p><to-do>TODO: set conditions for canMove = false (state.staggered should unable movement.)</to-do></p>
+                        <p>Used for initiating move commands for characters.</p>
+                        <p><to-do>TODO: set conditions for canMove = false (state.staggered should unable movement, but is already controlled in Update(). Maybe a global bool from GameController?)</to-do></p>
+                        
                         <h4>Attack()</h4>
-                        <p></p>
+                        <p>Used for attack commands, parent method sets onAttackCooldown if cooldown is not passed.</p>
+                        
                         <h4>Interact()</h4>
-                        <p></p>
+                        <p>Parent method for Interact commands, <to-do>should check and set canInteract bool value.</to-do></p>
+                        <p>Interact and it's actions are called on Interactable objects.</p>
+
                         <h4>Pause()</h4>
-                        <p></p>
+                        <p>Sets character state to State.paused, disabling inputs and actions. Character state before pause is saved in stateBeforePause.</p>
+                        
                         <h4>Resume()</h4>
-                        <p></p>
+                        <p>Resumes character with state before pause.</p>
+                        
                         <h4>Die()</h4>
-                        <p></p>
+                        <p>Called when character is eliminated in game.</p>
                     </div>
-                    <h4>Shared methods</h4>
+                    <h4>Class methods</h4>
                     <p>General functionality methods, not overwritable.</p>
                     <div>
+                        <h4>Flip()</h4>
+                        <p>Flips the gfx object over its x-axis if current scale and input float signs don't match.</p>
+
+                        <h4>SetAnimatorValue()</h4>
+                        <p>Set bool, float or trigger in animator depending on input values. First input is string name of animator value.</p>
+
+                        <h4>MoveTo()</h4>
+                        <p>Physics-moves the character to Vector2 position. Used by Move() to move the character each frame.</p>
+
+                        <h4>SetPosition()</h4>
+                        <p>Teleports character to position <to-do>Should use Rigidbody2D.position instead of Transform.position if execution should be at the end of physics step.</to-do></p>
+
+                        <h4>SetFloor()</h4>
+                        <p>Pseudo-3D method for changing floor/height over ground level. Updates order in z-axis and change collider layer to the current floor.</p>
+
+                        <h4>ToggleAttack()</h4>
+                        <p>If the character has an attack object, this method activates it and initiates an attack. Should be called from animator so that the attack object can be disabled.</p>
+
+                        <h4>DisableAttack()</h4>
+                        <p>Disables characters attack object. Called in animator. Attack actions are handled by damage objects.</p>
+
+                        <h4>UpdateDepth()</h4>
+                        <p>Updates the gfx z-order if player object has moved in y-axis.</p>
+                        <p>z-position is 1/100 of y-position with offset included.</p>
+
+                        <h4>SetState()</h4>
+                        <p>Changes the character state to input state</p>
+
+                        <h4>GetState()</h4>
+                        <p>Return characters current state.</p>
+
+                        <h4>GetFloor()</h4>
+                        <p>Return characters current floor.</p>
+
+                        <h4>TryStagger()</h4>
+                        <p>Initiates coroutine that keeps character state staggered during a set duration. Only called if state is not staggered.</p>
+
+                        <h4>StaggerCharacter()</h4>
+                        <p>Keeps a character staggered during input float duration. <to-do>Should set state to 'idle' at end of method, not 'staggered'?</to-do></p>
+
                     </div>
                     <h4>A*-related methods and properties.</h4>
                     <p>Controls object behaviour with the A*-grid.</p>
                     <div>
+                        <p><list-item>Vector3[] AstarPath :</list-item> Array of positions along found path.</p>
+
+                        <h4>AstarMove()</h4>
+                        <p>Requests a path from current position to target position and calls OnPathFound().</p>
+                    
+                        <h4>OnPathFound/(</h4>
+                        <p>Starts the coroutine FollowPath if a path is found. If the character is already following a path, the previous coroutine is stopped.</p>
+                    
+                        <h4>ResumePath()</h4>
+                        <p>Not currently implemented, should be used to continue on a path not currently finished. <to-do>in if-loop, stop, then start coroutine FollowPath().</to-do></p>
+                    
+                        <h4>FollowPath()</h4>
+                        <p><to-do>Condition for next move should also include canMove.</to-do></p>
+                        <p>Moves the character from one waypoint to the next in the AstarPath array. Continues until the last waypoint is reached.</p>
+                        
+                        <h4>StopAstarMove()</h4>
+                        <p>Cancels current coroutine and nulls the AstarPath. </p>
+
+                        <h4>OnDrawGizmos()</h4>
+                        <p>Adds black squares at each waypoint and black lines between each waypoint if gizmos are enabled.</p>
                     </div>
                 </div>
             </div>
@@ -123,11 +199,103 @@
             <div class="content-item">
                 <h3>Enemy.cs</h3>
                 <p>Enemy child-class of character.cs.</p>
+                <div>
+                    <h4>Properties</h4>
+                    <p>Enemy specific properties.</p>
+                    <div>
+                        <h4>public</h4>
+                        <div>
+                            <p><list-item>UnityEvent onDeathEvent :</list-item> event that triggers on Enemy death (when Die() is called).</p>
+                            <p><list-item>string id :</list-item> identifier string for this specific enemy object.</p>
+                            <p><list-item>bool resetable :</list-item> if the enemy can respawn/be killed again during the same scene <to-do>(or save file)</to-do>.</p>
+                            <p><list-item>bool isAlive :</list-item> states if the enemy is alive or has been killed (killed nonresetable enemies don't respawn in scene).</p>
+                        </div>
+
+                        <h4>private</h4>
+                        <div>
+                            
+                        </div>
+                    </div>
+
+                    <h4>Overwritten methods</h4>
+                    <p>Inherited methods from parent class Character.</p>
+                    <div>
+                        <h4>Start()</h4>
+                        <p>If enemy has target, use AstarMove towards it. Only for debuging.</p>
+                        
+                        <h4>Update()</h4>
+                        <p></p>
+
+                        <h4>Die()</h4>
+                        <p>Invokes onDeathEvent, <to-do>should also set isAlive to false.</to-do></p>
+                    </div>
+  
+                    <h4>Class methods</h4>
+                    <p>Enemy class specific methods.</p>
+                    <div>
+                        <h4>TrySetActive()</h4>
+                        <p>Reactivates the enemy at it's current position if resetable or isAlive is true.</p>
+                        <p><to-do>Should reset to start position, which currently is not saved or stored. Likewise for stats like hp etc.</to-do></p>                        
+                    
+                        <h4>SetInactive()</h4>
+                        <p>Deactivates gameobject and stops any current movement via Astar.</p>
+                        
+                    </div>
+
+                </div>
             </div>
 
             <div class="content-item">
                 <h3>Player.cs</h3>
                 <p>Player child-class of character.cs.</p>
+                <div>
+                    <h4>Properties</h4>
+                    <p>Player specific properties.</p>
+                    <div>
+                        <h4>public</h4>
+                        <div>
+                            <p><list-item>Collider2D interactCollider :</list-item> the collider that interacts with Interactable objects.</p>
+                            <p><list-item>float interactDist :</list-item> how far out from player transform the interact collider is placed.</p>
+                            <p><list-item>bool canInteract :</list-item> if the player is able to interact with Interactable objects.</p>
+                            <p><list-item>bool InteractCall{} :</list-item> returns _interactCall. Used by Interactable class to trigger interact method.</p>
+                        </div>
+
+                        <h4>private</h4>
+                        <div>
+                            <p><list-item>Vector2 interactOffset :</list-item> y-offset of interact collider (where pseudo-3D ground is).</p>
+                            <p><list-item>bool _interactCall :</list-item> makes sure only one interact is triggered even if button is hold.</p>
+                            <p><list-item>bool hasStarted :</list-item> makes sure that Start() only runs once if player is spawned via Initiate(). <to-do>Should be set as false, might be redundant, but for claritys sake.</to-do></p>
+                        </div>
+
+                        <h4>Overwritten methods</h4>
+                        <p>Inherited methods from parent class Character.</p>
+                        <div>
+                            <h4>Start()</h4>
+                            <p>Stores origin position of interactCollider, only runs once.</p> 
+                        
+                            <h4>Update()</h4>
+                            <p>Updates the interactCollders position to align with look direction.</p> 
+
+                            <h4>Move()</h4>
+                            <p>Reads controller input and moves the character if able to do so. Calls animator to start movement animation. Updates lookDirection.</p> 
+                            <p>If the player was paused, zeros input to disable gliding after resuming player state.</p>
+                        
+                            <h4>Attack()</h4>
+                            <p>Triggers attack animation on attack input and cooldown reached.</p>
+                            <p>Reset cooldown timer.</p> 
+
+                            <h4>Interact()</h4>
+                            <p>Interacts once per button hold if able to interact (if canInteract is 'true').</p> 
+                        </div>
+      
+                        <h4>Class methods</h4>
+                        <p>Player class specific methods.</p>
+                        <div>
+                            <h4>Initiate()</h4>
+                            <p>Used when player is spawned by GameController() to make sure Start() is run and the right floor is set. </p>            
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
