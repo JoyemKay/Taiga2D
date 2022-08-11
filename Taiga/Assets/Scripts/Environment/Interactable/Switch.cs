@@ -19,8 +19,8 @@ public class Switch : MonoBehaviour
 
     public void ToggleSwitch()
     {
-        switchAnimator.SetBool("switch", !switchActive);
         switchActive = !switchActive;
+        switchAnimator.SetBool("switch", switchActive);
     }
 
     private void OnEnable()

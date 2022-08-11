@@ -7,12 +7,11 @@ public class Character : MonoBehaviour
 {
 
     State stateBeforePause;
-    public bool canAttack;
     public float moveSpeed, attackSpeed, offset;
     public GameObject gfx;
     public Transform target;
     public Vector2 lookDirection;
-    protected bool onAttackCooldown, canMove, hasMoved;
+    protected bool onAttackCooldown, canMove, hasMoved, canAttack;
     protected int currentFloor;
     protected float lastAttackTime;
     protected Rigidbody2D thisRigidbody;
@@ -159,6 +158,10 @@ public class Character : MonoBehaviour
             attackObject.DisableAttack();
         }
     }
+
+    public void CanAttack(bool condition){
+        canAttack = condition;
+    }
     //  Sets the correct z-pos based on the current y-pos (for pseudo-3D depth)
     void UpdateDepth()
     {
@@ -196,7 +199,7 @@ public class Character : MonoBehaviour
         }
         if (character)
         {
-            character.SetState(State.staggered);
+            character.SetState(State.idle);
         }
     }
 

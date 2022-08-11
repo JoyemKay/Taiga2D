@@ -60,14 +60,19 @@ public class Room : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (hasStarted)
         {
-            isActiveRoom = (other.CompareTag("Player") && !other.isTrigger);
+            if(!other.isTrigger && other.CompareTag("Player")){
+                isActiveRoom = true;
+                GameController.Instance.ActivateRoom(this, roomCollider);
+            }
+            /*isActiveRoom = (other.CompareTag("Player") && !other.isTrigger);
 
             if (isActiveRoom)
             {
                 GameController.Instance.ActivateRoom(this, roomCollider);
-            }
+            }*/
         }
     }
 
@@ -75,12 +80,17 @@ public class Room : MonoBehaviour
     {
         if (hasStarted)
         {
-            isActiveRoom = (other.CompareTag("Player") && !other.isTrigger);
+            if (!other.isTrigger && other.CompareTag("Player"))
+            {
+                isActiveRoom = false;
+                GameController.Instance.DisableRoom(this);
+            }
+           /* isActiveRoom = (other.CompareTag("Player") && !other.isTrigger);
 
             if (!isActiveRoom && other.CompareTag("Player"))
             {
                 GameController.Instance.DisableRoom(this);
-            }
+            }*/
         }
     }
 

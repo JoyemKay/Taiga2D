@@ -771,7 +771,7 @@ TextureImporter:
       213: 4630723802756297515
     second: spritesheet_dungeon_255
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -791,6 +791,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -800,8 +802,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -822,9 +824,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -6251,6 +6257,263 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      spritesheet_dungeon_247: -5661327192601881716
+      spritesheet_dungeon_243: -2593367731190516534
+      spritesheet_dungeon_154: 7246553467656781268
+      spritesheet_dungeon_180: 7376821792021036154
+      spritesheet_dungeon_11: 4347321918564871254
+      spritesheet_dungeon_20: -237930534388256480
+      spritesheet_dungeon_64: 4521949411952395150
+      spritesheet_dungeon_100: -6616405088039706165
+      spritesheet_dungeon_73: 1615639051259395967
+      spritesheet_dungeon_136: -6933478295388541718
+      spritesheet_dungeon_152: -3881263921459529503
+      spritesheet_dungeon_208: 6265694914164040994
+      spritesheet_dungeon_250: -5535930156641331119
+      spritesheet_dungeon_80: -4601455924341489173
+      spritesheet_dungeon_148: 4248636570074300735
+      spritesheet_dungeon_134: -1719298352089660733
+      spritesheet_dungeon_159: -1828445558464672223
+      spritesheet_dungeon_189: 6259625306850865256
+      spritesheet_dungeon_18: 8752787076925451078
+      spritesheet_dungeon_204: -3830089339019859511
+      spritesheet_dungeon_132: -4424359410421889334
+      spritesheet_dungeon_224: 3337449779048791837
+      spritesheet_dungeon_151: 4933530953515298253
+      spritesheet_dungeon_234: -908918298391763861
+      spritesheet_dungeon_91: -7940407612115463990
+      spritesheet_dungeon_165: 3190671317767971562
+      spritesheet_dungeon_220: 6183164825601474994
+      spritesheet_dungeon_211: -6519097495544965080
+      spritesheet_dungeon_228: 863476788525814970
+      spritesheet_dungeon_174: 3891770329787684312
+      spritesheet_dungeon_42: -7582718033915293303
+      spritesheet_dungeon_14: -6049093444006492617
+      spritesheet_dungeon_82: 2067035629470810098
+      spritesheet_dungeon_102: 308998003659196901
+      spritesheet_dungeon_187: -7933650839989007768
+      spritesheet_dungeon_183: -4446180977084404077
+      spritesheet_dungeon_140: -7830228239172572063
+      spritesheet_dungeon_212: -311341462180846051
+      spritesheet_dungeon_65: 1963936731820077463
+      spritesheet_dungeon_1: -3939157249013268442
+      spritesheet_dungeon_41: 6819479208872116321
+      spritesheet_dungeon_75: -2235786784375788764
+      spritesheet_dungeon_130: 6362325930200904360
+      spritesheet_dungeon_76: -4013619324564495752
+      spritesheet_dungeon_27: 9186129501724207326
+      spritesheet_dungeon_139: -680230958845368544
+      spritesheet_dungeon_186: -8026743368698416191
+      spritesheet_dungeon_135: 7983108339194001356
+      spritesheet_dungeon_17: 6491396578652819634
+      spritesheet_dungeon_233: 4993216837094426666
+      spritesheet_dungeon_103: -1423956226574461700
+      spritesheet_dungeon_115: 3346891847454361043
+      spritesheet_dungeon_123: 5170083693697742891
+      spritesheet_dungeon_118: 3124745397553819709
+      spritesheet_dungeon_199: -218178221276138896
+      spritesheet_dungeon_119: 8264356105597105039
+      spritesheet_dungeon_50: 5333422141920118699
+      spritesheet_dungeon_200: 1979196982228187792
+      spritesheet_dungeon_9: -7291760271010935261
+      spritesheet_dungeon_7: -3033967880962970929
+      spritesheet_dungeon_177: 793302364491589122
+      spritesheet_dungeon_196: 5706445215607209627
+      spritesheet_dungeon_47: 456607041547551721
+      spritesheet_dungeon_213: 1038098907088299873
+      spritesheet_dungeon_45: 4162486823087017760
+      spritesheet_dungeon_229: -4771656099753320102
+      spritesheet_dungeon_22: 4492695935721377472
+      spritesheet_dungeon_98: 5245786204240182370
+      spritesheet_dungeon_3: 3907453791327739637
+      spritesheet_dungeon_169: 539304490656599052
+      spritesheet_dungeon_236: -2770424684337698185
+      spritesheet_dungeon_143: 7442714110246205076
+      spritesheet_dungeon_237: 1980765612316921618
+      spritesheet_dungeon_155: 591890614525210659
+      spritesheet_dungeon_104: 4734407498636511755
+      spritesheet_dungeon_15: -2755876530251822347
+      spritesheet_dungeon_147: 2662725679731522552
+      spritesheet_dungeon_244: 6991838238943712217
+      spritesheet_dungeon_192: 6715500607056625027
+      spritesheet_dungeon_0: -6099673267232635764
+      spritesheet_dungeon_168: -5609465036347360784
+      spritesheet_dungeon_55: -1516247170527260691
+      spritesheet_dungeon_62: 2018595977064779400
+      spritesheet_dungeon_29: -5795614990206148918
+      spritesheet_dungeon_66: -4166906641212808944
+      spritesheet_dungeon_95: -8797435315388520425
+      spritesheet_dungeon_195: -249031391184566673
+      spritesheet_dungeon_223: 5572617808762673182
+      spritesheet_dungeon_111: 8630895092866278835
+      spritesheet_dungeon_235: -8672227776571606808
+      spritesheet_dungeon_219: 3914207542091370297
+      spritesheet_dungeon_43: -9076733816534215462
+      spritesheet_dungeon_77: -403725296946651411
+      spritesheet_dungeon_78: 910343628934773828
+      spritesheet_dungeon_153: -4330328367855331182
+      spritesheet_dungeon_105: 7620296655989019375
+      spritesheet_dungeon_32: 2872882019364818580
+      spritesheet_dungeon_57: 5112563412059938408
+      spritesheet_dungeon_16: 6296039318433725996
+      spritesheet_dungeon_44: 9112216986784379329
+      spritesheet_dungeon_226: 1093589097006349650
+      spritesheet_dungeon_231: 992516049847905560
+      spritesheet_dungeon_49: -2072729057524766856
+      spritesheet_dungeon_131: 42093924099116915
+      spritesheet_dungeon_88: 7017842118993596692
+      spritesheet_dungeon_173: -6115229179909021255
+      spritesheet_dungeon_109: 5719460197229768834
+      spritesheet_dungeon_38: -4290979541702807368
+      spritesheet_dungeon_13: -6789779988761024069
+      spritesheet_dungeon_227: -2228772840318488720
+      spritesheet_dungeon_89: -4125406921324727015
+      spritesheet_dungeon_5: 1015215808504504962
+      spritesheet_dungeon_28: -6284535616626696225
+      spritesheet_dungeon_70: 5916510363571499953
+      spritesheet_dungeon_207: 2114246821860541535
+      spritesheet_dungeon_141: -2486404168130414809
+      spritesheet_dungeon_146: 439404833693566348
+      spritesheet_dungeon_178: 998750979309701672
+      spritesheet_dungeon_232: -7629739085807007866
+      spritesheet_dungeon_126: 9092549726512154563
+      spritesheet_dungeon_53: 4409208016470628521
+      spritesheet_dungeon_68: 1003310704901010709
+      spritesheet_dungeon_221: -1468357359993994910
+      spritesheet_dungeon_25: -6174363060978653993
+      spritesheet_dungeon_172: -4809501074617157391
+      spritesheet_dungeon_4: -6393670697366050157
+      spritesheet_dungeon_175: -5535737135446926725
+      spritesheet_dungeon_215: -6498178695699589403
+      spritesheet_dungeon_60: 4869818700325655094
+      spritesheet_dungeon_74: -5358118466047116781
+      spritesheet_dungeon_124: 3661029010791191003
+      spritesheet_dungeon_217: 6179430014881906517
+      spritesheet_dungeon_191: 1592851590887907738
+      spritesheet_dungeon_129: -6162659472751253956
+      spritesheet_dungeon_36: -8711051100911149831
+      spritesheet_dungeon_252: 3080745324096544614
+      spritesheet_dungeon_33: -689129170563061860
+      spritesheet_dungeon_61: -2834782835220764469
+      spritesheet_dungeon_71: 7976435242348813393
+      spritesheet_dungeon_253: 3601616319470276844
+      spritesheet_dungeon_150: -7336207164855563734
+      spritesheet_dungeon_249: 8524882760022731946
+      spritesheet_dungeon_245: 9185945843821599947
+      spritesheet_dungeon_161: -6574377848372826076
+      spritesheet_dungeon_185: 1490093160749211348
+      spritesheet_dungeon_99: 2094043759877749568
+      spritesheet_dungeon_58: 989831189995296697
+      spritesheet_dungeon_239: 7945342204467381845
+      spritesheet_dungeon_238: 4433135368042758865
+      spritesheet_dungeon_125: -2939345063928453925
+      spritesheet_dungeon_69: 7403275335797415951
+      spritesheet_dungeon_67: -7701898217055426963
+      spritesheet_dungeon_197: -4464827190175872209
+      spritesheet_dungeon_184: -7313588673870805405
+      spritesheet_dungeon_190: -8772013348969098200
+      spritesheet_dungeon_201: 203118792192980565
+      spritesheet_dungeon_26: -8230661702731275536
+      spritesheet_dungeon_52: -1379981060071569217
+      spritesheet_dungeon_59: 4530288220089678702
+      spritesheet_dungeon_156: 1748821548379823730
+      spritesheet_dungeon_120: -8251588294114488645
+      spritesheet_dungeon_6: -6474255208685094076
+      spritesheet_dungeon_206: -8644974582510989585
+      spritesheet_dungeon_166: 8822597454150812269
+      spritesheet_dungeon_96: -521038534847614276
+      spritesheet_dungeon_121: 7134789512844472506
+      spritesheet_dungeon_19: 6634899971725650167
+      spritesheet_dungeon_167: 1425628421123292675
+      spritesheet_dungeon_92: 3119167297133261808
+      spritesheet_dungeon_254: 6069287221538719370
+      spritesheet_dungeon_84: 3182421046768898502
+      spritesheet_dungeon_51: 7246999462346689259
+      spritesheet_dungeon_83: 7013104954207584410
+      spritesheet_dungeon_242: 1011690433036973190
+      spritesheet_dungeon_193: 102823700741832220
+      spritesheet_dungeon_203: -3420971602889044110
+      spritesheet_dungeon_218: 7492458897276473845
+      spritesheet_dungeon_2: -2723868847903961825
+      spritesheet_dungeon_251: 6016312421981419957
+      spritesheet_dungeon_122: 1530363435340699084
+      spritesheet_dungeon_12: 3741929917540507311
+      spritesheet_dungeon_8: -2043745448711410943
+      spritesheet_dungeon_81: -1758490965299947869
+      spritesheet_dungeon_107: -3906311267571942071
+      spritesheet_dungeon_144: -3000386558472494209
+      spritesheet_dungeon_101: -8607855109687507493
+      spritesheet_dungeon_72: -8279623450181668852
+      spritesheet_dungeon_93: -5598695999343069291
+      spritesheet_dungeon_117: -4606478575993239826
+      spritesheet_dungeon_157: 4382075353393951800
+      spritesheet_dungeon_170: 7907025632633387816
+      spritesheet_dungeon_34: 5710862674694298472
+      spritesheet_dungeon_10: 406258429422989648
+      spritesheet_dungeon_160: 7152884763514599537
+      spritesheet_dungeon_46: -663943631132744557
+      spritesheet_dungeon_79: -851435443091100855
+      spritesheet_dungeon_86: 2614035268158891003
+      spritesheet_dungeon_85: -8327785039438868446
+      spritesheet_dungeon_87: -1396451698627771776
+      spritesheet_dungeon_39: -2933873549017040959
+      spritesheet_dungeon_209: 3905533306991018657
+      spritesheet_dungeon_23: 6866071167220765516
+      spritesheet_dungeon_37: 1529705525538774686
+      spritesheet_dungeon_108: -4170733569186674856
+      spritesheet_dungeon_222: -131496714333852443
+      spritesheet_dungeon_230: -4671682912429501589
+      spritesheet_dungeon_188: -6422571719596036047
+      spritesheet_dungeon_127: 307738988669598321
+      spritesheet_dungeon_171: 4343578282467194096
+      spritesheet_dungeon_162: -143200411815163860
+      spritesheet_dungeon_248: -4398355169738139171
+      spritesheet_dungeon_94: 4614073033242993672
+      spritesheet_dungeon_164: -8596669732861014875
+      spritesheet_dungeon_133: -1229877824767911032
+      spritesheet_dungeon_240: 2703178944119159775
+      spritesheet_dungeon_40: 68950933628358359
+      spritesheet_dungeon_56: -851204459225571198
+      spritesheet_dungeon_246: 3540094278011268335
+      spritesheet_dungeon_112: 6010540841642059757
+      spritesheet_dungeon_90: -2518271219831007760
+      spritesheet_dungeon_110: -439689807039712316
+      spritesheet_dungeon_116: 1590079657530313247
+      spritesheet_dungeon_179: -8855273913027847631
+      spritesheet_dungeon_181: 6621424329669112382
+      spritesheet_dungeon_176: 2181817559543904391
+      spritesheet_dungeon_145: -3357176079290844500
+      spritesheet_dungeon_31: -7870071489627367204
+      spritesheet_dungeon_48: -2808491309278355139
+      spritesheet_dungeon_202: 1696496454603234341
+      spritesheet_dungeon_198: -908241544806507872
+      spritesheet_dungeon_128: 1890697927927097068
+      spritesheet_dungeon_225: 6310349789801514371
+      spritesheet_dungeon_21: 3002255232003095120
+      spritesheet_dungeon_54: -3635912855097432681
+      spritesheet_dungeon_106: 2254705148764677006
+      spritesheet_dungeon_113: -2133013735893241411
+      spritesheet_dungeon_24: -180948030749818614
+      spritesheet_dungeon_194: 4915085388087133657
+      spritesheet_dungeon_149: -6194592731864654822
+      spritesheet_dungeon_114: 2872692353427223671
+      spritesheet_dungeon_142: -7353278454829388760
+      spritesheet_dungeon_210: 2505205413841821890
+      spritesheet_dungeon_216: -6622799998343132351
+      spritesheet_dungeon_138: 7110094829138991970
+      spritesheet_dungeon_241: 464520105860608826
+      spritesheet_dungeon_255: 4630723802756297515
+      spritesheet_dungeon_158: 8854371111571654104
+      spritesheet_dungeon_35: 1596989847379884449
+      spritesheet_dungeon_97: -160240693801042350
+      spritesheet_dungeon_163: 1736144126911300028
+      spritesheet_dungeon_30: 5844210491900962498
+      spritesheet_dungeon_214: 1035894274248611264
+      spritesheet_dungeon_63: 7252190171092247005
+      spritesheet_dungeon_182: -1672164943786402194
+      spritesheet_dungeon_137: 6147838705770553029
+      spritesheet_dungeon_205: -2503680330377992116
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

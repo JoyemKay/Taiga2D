@@ -304,6 +304,8 @@ public class GameController : MonoBehaviour
 
         activePlayer.Initiate(levelSpawnLocation.floor);
         activePlayer.lookDirection = GetDirection(levelSpawnLocation.lookDirection);
+        // Enables player to attack.
+        activePlayer.CanAttack(true);
 
     }
 

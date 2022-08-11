@@ -771,7 +771,7 @@ TextureImporter:
       213: -9091592922503558649
     second: objects1_taiga_24
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -791,6 +791,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -800,8 +802,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -822,9 +824,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -5831,6 +5837,243 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      objects1_taiga_73: -5818684562183925534
+      objects1_taiga_227: -3565797947139484380
+      objects1_taiga_223: 2233963170461002948
+      objects1_taiga_251: 7434588037905592955
+      objects1_taiga_138: -1228508638741253909
+      objects1_taiga_34: 1083847205670234670
+      objects1_taiga_32: 1603528721877499668
+      objects1_taiga_213: -5723014623316101554
+      objects1_taiga_88: 9185679134419626630
+      objects1_taiga_165: -8650494809827692532
+      objects1_taiga_208: 2181312251898188572
+      objects1_taiga_84: 3110032078552220062
+      objects1_taiga_240: -4440614973372430865
+      objects1_taiga_206: -9202079889559314484
+      objects1_taiga_28: 1160679952223163358
+      objects1_taiga_123: 3261549927459921503
+      objects1_taiga_93: -6212235377435670798
+      objects1_taiga_198: -54742970087834314
+      objects1_taiga_23: 3628677416736174568
+      objects1_taiga_98: 74805671704098400
+      objects1_taiga_229: 6032377535243071194
+      objects1_taiga_1: 8125486115820111928
+      objects1_taiga_81: -8053212358777355781
+      objects1_taiga_248: 1418603140608128748
+      objects1_taiga_226: -5537781863794546474
+      objects1_taiga_33: 195722890969583729
+      objects1_taiga_116: -1717249485274081027
+      objects1_taiga_221: -2322617955375428099
+      objects1_taiga_247: -2894246746739397609
+      objects1_taiga_141: -1972011804772473398
+      objects1_taiga_50: 1363290364343907844
+      objects1_taiga_239: -8773769881125331146
+      objects1_taiga_24: -9091592922503558649
+      objects1_taiga_25: -3265009698905561228
+      objects1_taiga_113: -9151671527460518962
+      objects1_taiga_16: -3640683647386444319
+      objects1_taiga_38: 5944702108453507549
+      objects1_taiga_153: -6438230624194098653
+      objects1_taiga_89: 8399527606556905249
+      objects1_taiga_104: 6402231454999325518
+      objects1_taiga_7: 2247738875504043027
+      objects1_taiga_39: -7891289876686084185
+      objects1_taiga_77: -7310329601223378420
+      objects1_taiga_211: -7897524292630002746
+      objects1_taiga_120: -7713352739367112069
+      objects1_taiga_95: 1827556240499578261
+      objects1_taiga_246: 2335725297834239424
+      objects1_taiga_124: -6809128588787812806
+      objects1_taiga_214: -1191017457665420301
+      objects1_taiga_148: -8799388627437801734
+      objects1_taiga_235: 3167309931459672112
+      objects1_taiga_209: -6697056714806504731
+      objects1_taiga_2: 7319548824952053055
+      objects1_taiga_179: 5717768530386904633
+      objects1_taiga_189: -3857122982709171334
+      objects1_taiga_244: -8011080898503467381
+      objects1_taiga_220: 4284093752133338762
+      objects1_taiga_70: -800037055854700011
+      objects1_taiga_243: 1314202643669056656
+      objects1_taiga_117: 1335696379745010252
+      objects1_taiga_157: -5162313351768255336
+      objects1_taiga_183: -4009849307119332861
+      objects1_taiga_207: -4295681311683946140
+      objects1_taiga_72: 6565529812398894288
+      objects1_taiga_105: 5271967173155898585
+      objects1_taiga_51: -7115236880297112325
+      objects1_taiga_155: -3490210002608819005
+      objects1_taiga_80: -1190828143186140259
+      objects1_taiga_225: 422256852449333096
+      objects1_taiga_9: 3055328005122238671
+      objects1_taiga_86: -2017076911902325602
+      objects1_taiga_250: 6462155356275524277
+      objects1_taiga_205: -8090723939179851099
+      objects1_taiga_158: -9150583030168459874
+      objects1_taiga_200: 121046608328817226
+      objects1_taiga_252: 4870402235970508917
+      objects1_taiga_217: -6261953082843119764
+      objects1_taiga_31: 6792784775933217006
+      objects1_taiga_196: 1097911464532475946
+      objects1_taiga_135: -2469061466095195748
+      objects1_taiga_47: -7304096185506621240
+      objects1_taiga_145: -3645052146227509803
+      objects1_taiga_26: 8381085139323487228
+      objects1_taiga_69: 6165673283865387423
+      objects1_taiga_224: -9088983827311414053
+      objects1_taiga_152: -8676586967952578635
+      objects1_taiga_180: -8768591514025022712
+      objects1_taiga_108: -2416101089749162682
+      objects1_taiga_162: -7539146182090215868
+      objects1_taiga_136: 5504021227289883684
+      objects1_taiga_230: -4491981581982270350
+      objects1_taiga_8: 5121405236404378439
+      objects1_taiga_19: 6018498828645066394
+      objects1_taiga_151: -2281132398329525949
+      objects1_taiga_14: -4737079389588802171
+      objects1_taiga_119: -2956308743354953791
+      objects1_taiga_126: -2051268547634458090
+      objects1_taiga_143: -1120304529904954796
+      objects1_taiga_188: 7983656904157770936
+      objects1_taiga_5: -4453436513276125353
+      objects1_taiga_97: -5019884408944795501
+      objects1_taiga_118: -5293132377549157076
+      objects1_taiga_171: 109379826500417622
+      objects1_taiga_20: 7627694035781067806
+      objects1_taiga_17: 7165967202877218988
+      objects1_taiga_66: 8021130750278990492
+      objects1_taiga_144: -892099688495535803
+      objects1_taiga_29: -6180006302313313302
+      objects1_taiga_125: -3560343443881256824
+      objects1_taiga_231: -3091603518668726864
+      objects1_taiga_18: 5951264371356549039
+      objects1_taiga_159: -9019046304327842076
+      objects1_taiga_74: 8464744900132696301
+      objects1_taiga_172: -4436236638929213246
+      objects1_taiga_43: -2434986798062604313
+      objects1_taiga_68: 6207916289057336514
+      objects1_taiga_90: 4134251290947706291
+      objects1_taiga_91: -4447818820906678045
+      objects1_taiga_96: 7387441492611206172
+      objects1_taiga_128: 2123446520893700421
+      objects1_taiga_131: -9126010167902018784
+      objects1_taiga_164: 7447119947701273880
+      objects1_taiga_249: -3321598239065342417
+      objects1_taiga_111: -1168479527752266072
+      objects1_taiga_242: 2386501363841294758
+      objects1_taiga_37: -668545626658187059
+      objects1_taiga_107: 4938313698474358897
+      objects1_taiga_186: -8960901810296637636
+      objects1_taiga_168: 6699790677024388018
+      objects1_taiga_187: -5358660279373465194
+      objects1_taiga_129: 8609068677999010925
+      objects1_taiga_201: 6941960416028174114
+      objects1_taiga_204: -7255300419006794581
+      objects1_taiga_76: -6845893812857079222
+      objects1_taiga_253: 6351068366192705895
+      objects1_taiga_10: -251865032405742290
+      objects1_taiga_233: 9175758349523850571
+      objects1_taiga_12: -3349738950485746367
+      objects1_taiga_21: 5854699142379541055
+      objects1_taiga_232: 7003926803725472215
+      objects1_taiga_150: -93159088294159942
+      objects1_taiga_122: -6895073033653793845
+      objects1_taiga_147: 1200301417685558432
+      objects1_taiga_94: 7865916713738072435
+      objects1_taiga_177: 8507525145556391128
+      objects1_taiga_216: 8126991278753661010
+      objects1_taiga_101: 6958195806506265974
+      objects1_taiga_185: 3326618208837831349
+      objects1_taiga_121: 5497560479750092817
+      objects1_taiga_149: -4568042140438559472
+      objects1_taiga_234: -1348936268110626087
+      objects1_taiga_35: -9137089060604915604
+      objects1_taiga_182: 8481008415297326268
+      objects1_taiga_6: 4760700422157711347
+      objects1_taiga_3: 2300696509244732993
+      objects1_taiga_99: 4226215212640998856
+      objects1_taiga_167: -616748003968910437
+      objects1_taiga_202: -8377718167126096427
+      objects1_taiga_245: -8723922482642362162
+      objects1_taiga_215: 4790944066723204137
+      objects1_taiga_156: 2642498969488760692
+      objects1_taiga_13: 2716383672445808255
+      objects1_taiga_52: -5301841991637228743
+      objects1_taiga_45: 4664712246013151073
+      objects1_taiga_218: -4910151187232632088
+      objects1_taiga_237: 6728115875486967847
+      objects1_taiga_27: -7752975151305446670
+      objects1_taiga_92: -5852866294880121260
+      objects1_taiga_212: 3636949541322691919
+      objects1_taiga_197: 2400697658355086238
+      objects1_taiga_203: -1789102584151022708
+      objects1_taiga_109: 6630414758102293136
+      objects1_taiga_30: 2310992391938050401
+      objects1_taiga_254: 6052966655900722853
+      objects1_taiga_163: -5875220778242517533
+      objects1_taiga_87: -7976317496312776305
+      objects1_taiga_236: 6052817345279222177
+      objects1_taiga_142: 1553633893611660178
+      objects1_taiga_169: 8295218655263164283
+      objects1_taiga_63: 852523498219056750
+      objects1_taiga_22: -4769481318209101011
+      objects1_taiga_228: 2889217963913222720
+      objects1_taiga_79: -2653371368272596991
+      objects1_taiga_78: 8224065450272329453
+      objects1_taiga_71: 1073965208349745412
+      objects1_taiga_176: -8540892895636279629
+      objects1_taiga_83: -3214515224253545617
+      objects1_taiga_195: 1153930426320678101
+      objects1_taiga_82: -6901276917783423678
+      objects1_taiga_139: 4584407576502000218
+      objects1_taiga_193: -4021209045485341967
+      objects1_taiga_210: -7159693956544823910
+      objects1_taiga_241: 3899863113891986753
+      objects1_taiga_0: 4635430981679550775
+      objects1_taiga_11: 688954667934632802
+      objects1_taiga_154: -4935525459253437412
+      objects1_taiga_222: 7512596134749885609
+      objects1_taiga_85: 6574755055038596436
+      objects1_taiga_103: 7371168213187972271
+      objects1_taiga_53: 2198830282158501612
+      objects1_taiga_110: -5041032271134436440
+      objects1_taiga_184: -2633249945082180354
+      objects1_taiga_175: 2474305498211752176
+      objects1_taiga_173: -28293707774930467
+      objects1_taiga_194: -3353608377334604827
+      objects1_taiga_146: 3905256618030361998
+      objects1_taiga_170: 4304009529083639394
+      objects1_taiga_102: -6345815257407080153
+      objects1_taiga_54: -4565143983899567070
+      objects1_taiga_75: -7826993100267093817
+      objects1_taiga_181: -4663130470384098263
+      objects1_taiga_191: 4338115122024588267
+      objects1_taiga_174: 7455889011535000334
+      objects1_taiga_192: -3604887274436314205
+      objects1_taiga_130: 4214028383402727195
+      objects1_taiga_137: 6995227001872477078
+      objects1_taiga_199: 1915055775465875919
+      objects1_taiga_41: -6853183579446031984
+      objects1_taiga_15: 2408926451482552707
+      objects1_taiga_100: -6065143131675702467
+      objects1_taiga_166: -1932685111178103660
+      objects1_taiga_140: -7646179665441845729
+      objects1_taiga_219: -4979458253124260732
+      objects1_taiga_238: -150684671805251048
+      objects1_taiga_133: -751520288236326044
+      objects1_taiga_132: -3807841297451206357
+      objects1_taiga_106: -3302372416478840241
+      objects1_taiga_160: 8880767585041096455
+      objects1_taiga_178: -6106772677325655107
+      objects1_taiga_134: -7240006823138764800
+      objects1_taiga_190: 166162555013240521
+      objects1_taiga_161: 7611388793595130159
+      objects1_taiga_112: 7533506556728108126
+      objects1_taiga_127: 8231764425155400016
+      objects1_taiga_4: 4555385323566617376
+      objects1_taiga_255: -5620488309898681511
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

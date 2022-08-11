@@ -771,7 +771,7 @@ TextureImporter:
       213: -7332968862974874714
     second: spritesheet_taiga_255
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -791,6 +791,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -800,8 +802,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -822,9 +824,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -6443,6 +6449,263 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      spritesheet_taiga_8: -7677038586297237774
+      spritesheet_taiga_118: -7741107366289574216
+      spritesheet_taiga_235: 6517317693001235865
+      spritesheet_taiga_245: 1165594179536507927
+      spritesheet_taiga_127: -5068719897196365799
+      spritesheet_taiga_67: 1254904358281961357
+      spritesheet_taiga_228: 5219754701648203036
+      spritesheet_taiga_140: -7625450696230356104
+      spritesheet_taiga_214: 4266445823498467490
+      spritesheet_taiga_239: -2813419492446792876
+      spritesheet_taiga_186: -869983357654140605
+      spritesheet_taiga_147: -7500326970460983843
+      spritesheet_taiga_156: 9072713252042077717
+      spritesheet_taiga_26: -6918624004207335434
+      spritesheet_taiga_69: 6570955225893798086
+      spritesheet_taiga_225: 5635922055274343981
+      spritesheet_taiga_90: 1537453752622933664
+      spritesheet_taiga_129: 2191926373958175323
+      spritesheet_taiga_159: 5376519746266481728
+      spritesheet_taiga_131: -6922229443000256015
+      spritesheet_taiga_44: 7420864355164957532
+      spritesheet_taiga_149: -3053856580756280863
+      spritesheet_taiga_181: 8039430186064419547
+      spritesheet_taiga_1: 5810729099185633079
+      spritesheet_taiga_74: 8818391098321728364
+      spritesheet_taiga_27: -36344199296102970
+      spritesheet_taiga_16: 8279955326272372354
+      spritesheet_taiga_95: 4611308197990603448
+      spritesheet_taiga_57: 184966522875192468
+      spritesheet_taiga_155: -336961729696161255
+      spritesheet_taiga_63: 744762575981774122
+      spritesheet_taiga_28: 4115551151300383830
+      spritesheet_taiga_124: -7564111197520315610
+      spritesheet_taiga_182: -1616693778007057724
+      spritesheet_taiga_188: 6826433018508406017
+      spritesheet_taiga_199: 4482083012609213682
+      spritesheet_taiga_166: 5844519376529101202
+      spritesheet_taiga_198: -3237271049424066639
+      spritesheet_taiga_70: 4217568299798932568
+      spritesheet_taiga_211: 6001869684215020127
+      spritesheet_taiga_201: 6677777221698743961
+      spritesheet_taiga_97: 7475714606960455177
+      spritesheet_taiga_0: -1284119167623135589
+      spritesheet_taiga_2: 4255634907236968770
+      spritesheet_taiga_221: -8933161385915978484
+      spritesheet_taiga_226: -454841248848287991
+      spritesheet_taiga_247: 2241169218210137241
+      spritesheet_taiga_18: -1149461934099780816
+      spritesheet_taiga_153: -6577608642510244322
+      spritesheet_taiga_15: 790308915383432708
+      spritesheet_taiga_46: -7641457628273279335
+      spritesheet_taiga_178: -4593282220540009389
+      spritesheet_taiga_134: 8136367674117707877
+      spritesheet_taiga_50: 1604552436027531862
+      spritesheet_taiga_68: -7104175560378305364
+      spritesheet_taiga_163: -5922859490540202571
+      spritesheet_taiga_229: -686272775119603641
+      spritesheet_taiga_207: -6422338637249716516
+      spritesheet_taiga_233: 5198747984935386386
+      spritesheet_taiga_72: 5872207032855168068
+      spritesheet_taiga_132: -3915829983852849242
+      spritesheet_taiga_84: -8799779849584058616
+      spritesheet_taiga_175: 7020642183022102482
+      spritesheet_taiga_65: 4025806862197837140
+      spritesheet_taiga_23: 1738043122066101270
+      spritesheet_taiga_43: 6511190842589527704
+      spritesheet_taiga_30: -8226409536059789403
+      spritesheet_taiga_218: 5877008891570602587
+      spritesheet_taiga_222: 16141655473394503
+      spritesheet_taiga_133: -8833872954316497655
+      spritesheet_taiga_251: -1174381356367431125
+      spritesheet_taiga_220: 6621228530054895596
+      spritesheet_taiga_99: 5138783971207153113
+      spritesheet_taiga_89: -5899606510030732138
+      spritesheet_taiga_135: -8414313235615047349
+      spritesheet_taiga_216: 8373257848273301625
+      spritesheet_taiga_252: 5389681744648473301
+      spritesheet_taiga_75: 814422570833942069
+      spritesheet_taiga_231: 2805222903199333782
+      spritesheet_taiga_52: 4715395749035663227
+      spritesheet_taiga_136: 7856471308979583102
+      spritesheet_taiga_126: 649160385979205823
+      spritesheet_taiga_139: -4106463404916284992
+      spritesheet_taiga_184: 4089721732552351011
+      spritesheet_taiga_40: -848068469284836467
+      spritesheet_taiga_162: -1533667900069028162
+      spritesheet_taiga_183: -2887455697023719801
+      spritesheet_taiga_51: 1955353642990489534
+      spritesheet_taiga_55: -220048985597805222
+      spritesheet_taiga_14: 5116628697194221810
+      spritesheet_taiga_93: -2636969124079914807
+      spritesheet_taiga_105: 2732684804815367767
+      spritesheet_taiga_190: -8913017688419594550
+      spritesheet_taiga_58: 1955233004856700743
+      spritesheet_taiga_237: 1511136859177508107
+      spritesheet_taiga_191: -1747053054521021962
+      spritesheet_taiga_142: -910369394234027475
+      spritesheet_taiga_187: 985633011188828163
+      spritesheet_taiga_35: 3563240622588536195
+      spritesheet_taiga_56: 4650131900660898442
+      spritesheet_taiga_244: 4193634303030212072
+      spritesheet_taiga_113: -3154614422071922549
+      spritesheet_taiga_5: 8387454387090447614
+      spritesheet_taiga_232: 1669980193044095774
+      spritesheet_taiga_94: -4065929228652132454
+      spritesheet_taiga_248: 7819498850293214137
+      spritesheet_taiga_243: -5627883572242081636
+      spritesheet_taiga_48: 4633165777070299527
+      spritesheet_taiga_206: 1119856353581303203
+      spritesheet_taiga_223: 8439993318853355666
+      spritesheet_taiga_122: -4449821311979042125
+      spritesheet_taiga_45: 4924681742619396380
+      spritesheet_taiga_83: 4156027133973769798
+      spritesheet_taiga_32: -5489446161488941877
+      spritesheet_taiga_80: -6129509220060033495
+      spritesheet_taiga_138: -8059057700876157213
+      spritesheet_taiga_104: -5258710918414925952
+      spritesheet_taiga_141: 3465210927293210536
+      spritesheet_taiga_158: -6284191618631080574
+      spritesheet_taiga_130: 9198743890469990760
+      spritesheet_taiga_110: -9130952162607365437
+      spritesheet_taiga_79: 6298114037397966393
+      spritesheet_taiga_151: 3908545289779881073
+      spritesheet_taiga_59: 8516588601871983611
+      spritesheet_taiga_103: 935514810755764646
+      spritesheet_taiga_98: 8798181023544104290
+      spritesheet_taiga_212: 2200938524339658666
+      spritesheet_taiga_76: -3657238713401885023
+      spritesheet_taiga_203: -6191257255076169084
+      spritesheet_taiga_106: -3744896578521187673
+      spritesheet_taiga_171: -7368391012276722723
+      spritesheet_taiga_205: -1820229395938974931
+      spritesheet_taiga_180: -6806887912786454387
+      spritesheet_taiga_10: -4454692755152943371
+      spritesheet_taiga_189: 2835239799749318140
+      spritesheet_taiga_169: -2746429576932249074
+      spritesheet_taiga_177: -4552151542403837731
+      spritesheet_taiga_242: -5318416145029867944
+      spritesheet_taiga_33: -2376662949693199998
+      spritesheet_taiga_66: -1278394420203428277
+      spritesheet_taiga_144: 7955144436627826338
+      spritesheet_taiga_167: -9129284135949733157
+      spritesheet_taiga_73: -755988288782914355
+      spritesheet_taiga_255: -7332968862974874714
+      spritesheet_taiga_174: -5839708075448225813
+      spritesheet_taiga_96: -5050921979538201485
+      spritesheet_taiga_36: 391346159784986554
+      spritesheet_taiga_38: 7445140621108279685
+      spritesheet_taiga_208: -572074062664601636
+      spritesheet_taiga_227: 2170146352154342378
+      spritesheet_taiga_152: -1607337578594110172
+      spritesheet_taiga_170: -8789426044326533709
+      spritesheet_taiga_120: 4137617929770293282
+      spritesheet_taiga_125: 4900136056654904668
+      spritesheet_taiga_60: 9167420259931613631
+      spritesheet_taiga_241: -8938165481815910961
+      spritesheet_taiga_254: 4928613749997867713
+      spritesheet_taiga_92: -7499279734040163579
+      spritesheet_taiga_7: -4001884921643672733
+      spritesheet_taiga_81: 8349203127085494638
+      spritesheet_taiga_88: -3779750753294043665
+      spritesheet_taiga_116: -1372051099468673007
+      spritesheet_taiga_143: -5098092524007454676
+      spritesheet_taiga_176: 9119876233777969968
+      spritesheet_taiga_102: -6016832611086273346
+      spritesheet_taiga_82: -3655587234997217396
+      spritesheet_taiga_236: 7695868837010008413
+      spritesheet_taiga_20: 8635289575568322206
+      spritesheet_taiga_202: 3049573026738085105
+      spritesheet_taiga_12: -7749936132940612662
+      spritesheet_taiga_19: -1546998682831990483
+      spritesheet_taiga_154: -5256662212525718410
+      spritesheet_taiga_192: 4256142139141829546
+      spritesheet_taiga_219: -1467087196952536976
+      spritesheet_taiga_25: -5912918295823210729
+      spritesheet_taiga_54: -5852853756291114197
+      spritesheet_taiga_204: -53862254861956078
+      spritesheet_taiga_86: 7177774063244409517
+      spritesheet_taiga_197: -971227865479081769
+      spritesheet_taiga_238: 9149851764929051296
+      spritesheet_taiga_17: -5320817837994457159
+      spritesheet_taiga_6: 1246596532375337004
+      spritesheet_taiga_146: 4028048456760979667
+      spritesheet_taiga_194: -2197551204941350640
+      spritesheet_taiga_115: 6574135031936771185
+      spritesheet_taiga_246: 1082654696320910229
+      spritesheet_taiga_196: 3490126481690167274
+      spritesheet_taiga_34: 86547007535800077
+      spritesheet_taiga_112: 7960054893585613453
+      spritesheet_taiga_64: 613399915830471448
+      spritesheet_taiga_114: -3517457651033814667
+      spritesheet_taiga_157: 621000822089798095
+      spritesheet_taiga_3: -1339186266382876872
+      spritesheet_taiga_21: -8882820491592913297
+      spritesheet_taiga_217: 7929867256990634246
+      spritesheet_taiga_150: -4120451035313127353
+      spritesheet_taiga_250: 4694536218313253300
+      spritesheet_taiga_148: -1036758120969536160
+      spritesheet_taiga_253: 4481626847435712811
+      spritesheet_taiga_165: -8742563409575541807
+      spritesheet_taiga_61: 472034038095656157
+      spritesheet_taiga_4: -3326266080056060374
+      spritesheet_taiga_213: -7340023852215133552
+      spritesheet_taiga_62: -1809674033639787635
+      spritesheet_taiga_145: 4993220556460441241
+      spritesheet_taiga_249: -7499954377356889059
+      spritesheet_taiga_164: -9002568964866611585
+      spritesheet_taiga_168: -4371569972719328535
+      spritesheet_taiga_87: -6357294182760421477
+      spritesheet_taiga_111: 898614097803249024
+      spritesheet_taiga_200: 2365670470435827323
+      spritesheet_taiga_209: -2040114545189291151
+      spritesheet_taiga_161: 2489846406940064578
+      spritesheet_taiga_71: -3612708496874300398
+      spritesheet_taiga_108: 9205384299605742813
+      spritesheet_taiga_29: 6721699302575784284
+      spritesheet_taiga_91: -3579198100042158516
+      spritesheet_taiga_160: -7684908454027424475
+      spritesheet_taiga_42: 2234494138056895977
+      spritesheet_taiga_121: 4001278326845842333
+      spritesheet_taiga_123: -6020588359199987875
+      spritesheet_taiga_22: -4197716771554114367
+      spritesheet_taiga_85: 7460843206915001213
+      spritesheet_taiga_240: -6035035588253891948
+      spritesheet_taiga_107: 7803160292413630750
+      spritesheet_taiga_215: 2537251311099182697
+      spritesheet_taiga_77: -2003373018306330239
+      spritesheet_taiga_234: -5528437002136385620
+      spritesheet_taiga_53: -1383788619089920383
+      spritesheet_taiga_39: -3380916191637945995
+      spritesheet_taiga_31: -1942007186503357378
+      spritesheet_taiga_173: -4198105196838212841
+      spritesheet_taiga_100: 7277103103253385292
+      spritesheet_taiga_11: -3991042677850087448
+      spritesheet_taiga_9: -815194549912783224
+      spritesheet_taiga_101: 5908735119333905618
+      spritesheet_taiga_172: 4137292942621228801
+      spritesheet_taiga_128: 5782468356986423251
+      spritesheet_taiga_119: -7176262392528991818
+      spritesheet_taiga_230: -8267807309333718411
+      spritesheet_taiga_47: 3225587945071822223
+      spritesheet_taiga_137: -528485709095412045
+      spritesheet_taiga_117: -1299475766256564907
+      spritesheet_taiga_41: 7249052939698582086
+      spritesheet_taiga_224: -8365088800381051099
+      spritesheet_taiga_193: 5649209123934368695
+      spritesheet_taiga_78: -8296014115416332092
+      spritesheet_taiga_185: 7716685602080285494
+      spritesheet_taiga_210: 2006586213268944844
+      spritesheet_taiga_179: 2818757884903870633
+      spritesheet_taiga_49: -5721022055813127835
+      spritesheet_taiga_13: -4530747057210923667
+      spritesheet_taiga_109: -507110357595346862
+      spritesheet_taiga_37: -7718229209173378665
+      spritesheet_taiga_24: -5015646615597017512
+      spritesheet_taiga_195: -7923663276243334332
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

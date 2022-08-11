@@ -21,12 +21,29 @@ public class CameraController : MonoBehaviour
         {
             Vector3 targetPos = target.transform.position;
 
-
             Vector3 pos;
             if (roomBoundaries)
             {
-                pos = new Vector3(Mathf.Clamp(targetPos.x, roomBoundaries.bounds.min.x + mainCamera.orthographicSize * mainCamera.aspect, roomBoundaries.bounds.max.x - mainCamera.orthographicSize * mainCamera.aspect),
-                                  Mathf.Clamp(targetPos.y, roomBoundaries.bounds.min.y + mainCamera.orthographicSize, roomBoundaries.bounds.max.y - mainCamera.orthographicSize),
+                float localX;
+                float localY;
+
+                if(roomBoundaries.bounds.size.x < mainCamera.orthographicSize*mainCamera.aspect*2){
+                    localX = roomBoundaries.bounds.center.x;
+                }else{
+                    localX = Mathf.Clamp(targetPos.x, roomBoundaries.bounds.min.x + mainCamera.orthographicSize * mainCamera.aspect, roomBoundaries.bounds.max.x - mainCamera.orthographicSize * mainCamera.aspect);
+                }
+
+                if (roomBoundaries.bounds.size.y < mainCamera.orthographicSize * 2)
+                {
+                    localY = roomBoundaries.bounds.center.y;
+                }
+                else
+                {
+                    localY = Mathf.Clamp(targetPos.y, roomBoundaries.bounds.min.y + mainCamera.orthographicSize, roomBoundaries.bounds.max.y - mainCamera.orthographicSize);
+                }
+
+                pos = new Vector3(localX,
+                                  localY,
                                   transform.position.z);
 
             }

@@ -9,7 +9,7 @@ public class SetPlayerCanAttack : MonoBehaviour
         
         Player player =  FindObjectOfType<Player>();
         if (player){
-            player.canAttack = state;
+            player.CanAttack(state);
         }
     }
 }

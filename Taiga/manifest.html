@@ -72,7 +72,6 @@
                         <h4>public</h4>
                         <div>
                             <p><list-item>State stateBeforePause :</list-item> Saves the objects state before a pause is called.</p>
-                            <p><list-item>bool canAttack :</list-item> 'true' if the character should be able to use overwritten Attack() <to-do>(should be protected, not public. Make method CanAttack(), property is changed in SetPlayerCanAttack().)</to-do>.</p>
                             <p><list-item>float moveSpeed :</list-item> The characters move-speed, in grids/second.</p>
                             <p><list-item>float attackSpeed :</list-item> The characters attack-speed, in seconds/attack.</p>
                             <p><list-item>float offset :</list-item> offset position between gameobject position and pseudo-3D-ground position of sprite.</p>
@@ -83,6 +82,7 @@
                         <h4>protected</h4>
                         <div>
                             <p><list-item>bool onAttackCooldown :</list-item> if the character is on attack cooldown, i.e, can't trigger an attack until cooldown is reached.</p>
+                            <p><list-item>bool canAttack :</list-item> 'true' if the character should be able to use overwritten Attack().</p>
                             <p><list-item>bool canMove :</list-item> 'true' if the character should be able to move by controller input or other direct action.</p>
                             <p><list-item>bool hasMoved :</list-item> 'true' if the character has moved in the current frame <to-do>(currently only used in MoveTo(), should be set as 'false' at start of Move(), and 'true' in any move-related method)</to-do>.</p>
                             <p><list-item>int currentFloor :</list-item> Used for pseudo-3D to determine how high in the world the character is (0 is ground-floor, changed by SetFloor()).</p>
@@ -449,7 +449,6 @@
                         <div>
                             <h4>SetCanAttack()</h4>
                             <p>Sets player.canAttack to bool state.</p>
-                            <p><to-do>Should call player.CanAttack(state), so that bool canAttack can be protected.</to-do></p>
                         </div>
                     </div>
                 </div> 
@@ -475,7 +474,6 @@
                         <div>
                             <h4>ToggleSwitch()</h4>
                             <p>Flips value on switchActive and sends to animator.</p>
-                            <p><to-do>Flip order on lines in method for readability.</to-do></p>
 
                             <h4>OnEnable()</h4>
                             <p>Finds the animator, starts animation corresponding to bool value of switchActive.</p>
@@ -515,7 +513,6 @@
                         <div>
                             <h4>Update()</h4>
                             <p>Triggers event after onActiveDelay seconds if manualActivate is 'true'.</p>
-                            <p><to-do>Flip order on lines in method for readability.</to-do></p>
 
                             <h4>Wait()</h4>
                             <p>Waits 'time' seconds, then runs ActivateToggle().</p>
@@ -523,10 +520,10 @@
                             <h4>ActivateToggle()</h4>
                             <p>Triggers the event. If oneTime is 'true' disables gameObject.</p>
                             <p><to-do>Should only disable component, or should the timer be a seperate child on the component that event triggers on?</to-do></p>
-                            <p><to-do>If recurring, timer should be set to '0' after event is triggered. active status should also be set to 'true' if not. Otherway, recurring events will never trigger from manualActivate.</to-do></p>
 
                             <h4>StartTimer()</h4>
                             <p>Resets timer and sets active to 'true'.</p>
+                            <p>Call this from interactable objects Interact() to make timer recurring.</p>
 
                         </div>
                     </div>

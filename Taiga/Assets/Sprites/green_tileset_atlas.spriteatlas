@@ -40,13 +40,16 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 1
       enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: c7af6e799709841deb7b3bd958629969, type: 3}
     - {fileID: 2800000, guid: 21963eacf08ba48f68a3710358b453a6, type: 3}
     - {fileID: 2800000, guid: c48b26fdb6fce4cf8bae5688cfdc888d, type: 3}
-    totalSpriteSurfaceArea: 201776
     bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 5121405236404378439, guid: c7af6e799709841deb7b3bd958629969, type: 3}
@@ -1546,5 +1549,6 @@ SpriteAtlas:
   - spritesheet_dungeon_68
   - spritesheet_dungeon_160
   - spritesheet_dungeon_176
+  m_RenderDataMap: {}
   m_Tag: green_tileset_atlas
   m_IsVariant: 0
