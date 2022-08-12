@@ -40,6 +40,7 @@ public class Player : Character
     protected override void Update()
     {
         base.Update();
+        thisRigidbody.velocity = Vector2.zero; //Added because of drift after diagonal collisions.
         interactCollider.offset = interactOffset + lookDirection * (interactDist);
     }
 
@@ -70,6 +71,7 @@ public class Player : Character
                 Flip(Mathf.Sign(lookDirection.x));
 
                 MoveTo(new Vector2(transform.position.x, transform.position.y) + movePos * moveSpeed * Time.deltaTime);
+
             }else{
                 SetAnimatorValue("isMoving", false);
             }

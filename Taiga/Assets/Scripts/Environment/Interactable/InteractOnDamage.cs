@@ -39,7 +39,7 @@ public class InteractOnDamage : MonoBehaviour
 
     public void DestroyOnInteract(){
         animator.enabled = true;
-        blockingCollider.enabled = false;
+        if (blockingCollider) { blockingCollider.enabled = false; }
         animator.SetTrigger("destroy");
     }
 
