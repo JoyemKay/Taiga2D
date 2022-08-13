@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Direction{
-    up,
-    down,
-    left,
-    right
+[System.Serializable]
+public struct MoveTriggers{
+    public MoveTrigger up, down, left, right;
 }
+
 public class PushBlock : MonoBehaviour
 {
-
-    public MoveTrigger up,down,left,right;
+    public MoveTriggers moveTriggers;
+    public AllowedDirections allowedDirections;
     public int pushAmount;
     int _pushAmount;
     int moveTicker = 0;
@@ -32,7 +31,9 @@ public class PushBlock : MonoBehaviour
     {
         worldObject = GetComponentInChildren<WorldObject>();
         push = false;
-        thisRB = GetComponent<Rigidbody2D>();  
+        thisRB = GetComponent<Rigidbody2D>();
+        startPos = transform.position;
+        endPos = startPos;
     }
 
     private void Update()
@@ -58,15 +59,22 @@ public class PushBlock : MonoBehaviour
                     thisRB.MovePosition(new Vector2(startPos.x + moveTicker * (endPos.x - startPos.x) / 16, startPos.y + moveTicker * (endPos.y - startPos.y) / 16));
                     moveTicker++;
 
-                }if(Time.time >=pushTimer + pushDuration){
-                    thisRB.MovePosition(endPos);
-                    worldObject.SetDepth(endPos);
-                    push = false;
-                    moving = false;
-                    moveTicker = 0;
-                    if (_pushAmount > 0){
-                        _pushAmount--;
-                    }
+                }
+            if(Time.time >pushTimer + pushDuration){
+                worldObject.SetDepth(endPos);
+                thisRB.MovePosition(endPos);
+
+                //Vector2 thisPos = new Vector2(transform.position.x, transform.position.y);
+                //if (!(Mathf.Abs(thisPos.magnitude - endPos.magnitude) > Mathf.Epsilon))
+               // {
+                push = false;
+                moving = false;
+                moveTicker = 0;
+                if (_pushAmount > 0)
+                {
+                    _pushAmount--;
+                }
+               // }
                 }
             }
 
@@ -83,24 +91,24 @@ public class PushBlock : MonoBehaviour
         {
             MoveTrigger activeTrigger;
             Direction pushFrom;
-            if (up.playerOccupied)
+            if (moveTriggers.up.playerOccupied)
             {
-                activeTrigger = up;
+                activeTrigger = moveTriggers.up;
                 pushFrom = Direction.up;
             }
-            else if (down.playerOccupied)
+            else if (moveTriggers.down.playerOccupied)
             {
-                activeTrigger = down;
+                activeTrigger = moveTriggers.down;
                 pushFrom = Direction.down;
             }
-            else if (left.playerOccupied)
+            else if (moveTriggers.left.playerOccupied)
             {
-                activeTrigger = left;
+                activeTrigger = moveTriggers.left;
                 pushFrom = Direction.left;
             }
-            else if (right.playerOccupied)
+            else if (moveTriggers.right.playerOccupied)
             {
-                activeTrigger = right;
+                activeTrigger = moveTriggers.right;
                 pushFrom = Direction.right;
             }
             else { return; }
@@ -120,16 +128,16 @@ public class PushBlock : MonoBehaviour
         //If target grid is occupied, dont try to push
         switch(direction){
             case Direction.up:
-                if (down.isOccupied)    { yield break; }
+                if (moveTriggers.down.isOccupied || !allowedDirections.down)    { yield break; }
                 break;
             case Direction.down:
-                if (up.isOccupied)      { yield break; }
+                if (moveTriggers.up.isOccupied || !allowedDirections.up)      { yield break; }
                 break;
             case Direction.left:
-                if (right.isOccupied)   { yield break; }
+                if (moveTriggers.right.isOccupied || !allowedDirections.left)   { yield break; }
                 break;
             case Direction.right:
-                if (left.isOccupied)    { yield break; }
+                if (moveTriggers.left.isOccupied || !allowedDirections.right)    { yield break; }
                 break;   
         }
         //only allow one instance of this coroutine per cycle

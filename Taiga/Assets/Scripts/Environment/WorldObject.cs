@@ -79,7 +79,15 @@ public class WorldObject : MonoBehaviour
 
         if (Mathf.Abs(pos.z - objPos.z / 100) > Mathf.Epsilon)
         {
-            transform.localPosition = pos;
+            if (gfxObject)
+            {
+                pos = new Vector3(gfxObject.localPosition.x, gfxObject.localPosition.y, pos.z);
+                gfxObject.transform.localPosition = pos;
+            }
+            else
+            {
+                transform.localPosition = pos;
+            }
         }
     }
 

@@ -55,6 +55,6 @@ public class InteractOnDamage : MonoBehaviour
             Start();
         }
         animator.enabled = false;
-        blockingCollider.enabled = true;
+        if (blockingCollider) { blockingCollider.enabled = true; }
     }
 }

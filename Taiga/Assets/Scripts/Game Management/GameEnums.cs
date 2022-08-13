@@ -56,6 +56,19 @@ public struct ItemSpawnStruct
     public float chance;
 }
 
+public enum Direction
+{
+    up,
+    down,
+    left,
+    right
+}
+[System.Serializable]
+public struct AllowedDirections
+{
+    public bool up, down, left, right;
+}
+
 public class GameEnums : MonoBehaviour
 {
     //Contains the enums used in the game
