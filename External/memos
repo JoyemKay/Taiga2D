@@ -43,7 +43,7 @@ b: Normal attack / Interact
 a: Element skill
 
 Hold any element button to reset elements.
-
+Two different elements lets player choose between items from the both elements with hold of item skill key.
 
   
 Elemental primary:
@@ -54,6 +54,13 @@ Water -  Shield (Block enemy attacks)
 
 Elemental secondary:
 Fire  -  Enhance (applies element damage to regular attack, increase damage)
-Wind  -  Dash (A dash movement with damage)
+Wind  -  Dash (A dash movement with damage, short and long)
 Earth -  Sentry (stationary melee turret)
-Water -  Freeze/Slow 
+Water -  Freeze/Slow (also works on water surface, limited freezes (3 and 5?))
+
+Elemental items:
+Fire  - Bomb amphora
+Wind  - Air bow
+Earth - Earthen grasp? (Lift heavy objects) no item cost
+Water - Healing water?
+
