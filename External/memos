@@ -1,1 +1,57 @@
------ Idéer -----
+----- Inspirations-bucket -----
+Spelidé: Action-RPG á la Zelda LttP, utforskande miljö/story och lätt skillbaserad combat. Skills och content kopplade till aktivering och sortering av element-orbs
+Setting: Fantasy medieval, rural? Romersk estetik och inspiration?
+Två tilsets behövs till att börja med:
+Overworld: Skog/fält (Olivträd, pinjetall, timjan, vass)
+Dungeon: Grotta/raserade tempel (stalagmiter, raserade pelare), ska kunna gå från grotta till mer tempel i samma tiles. (Marmor/sandstensgrottor)
+
+7 st tempelgrottor med bossar kopplade till progress av story. (tänk de 7 kullarna).
+Bossgrottan är låst tills att alla 4 element är upplåsta (tänkt 4 st behållare som behöver aktiveras med respektive skill)
+4 st för att låsa upp elementen, fås innan respektive boss.
+Jupiter      - Sky/thunder
+Terra        - Earth 
+Neptune      - Water/sea
+Vulcan       - Fire
+
+2 st för att förenkla/möjliggöra sista bossfighten
+Janus        - Time
+Mars         - War
+
+1 st slutboss
+Sol Invictus - End-boss
+
+Byar/mindre samhällen kring de 7 grottorna, 
+
+
+Currency: Tillför vad, och används för vad? (Kanske är rena resurser som hittas, och är beroende av vad som droppas ifrån, buskar kan ge frön, fineder kan ge päls och sånt. Resurshanteringen är helt baserad på byteshandel).
+Skills kanske låser upp vissa items (eld kan tillsammans med krukor bli bomber ex. Vind blir en pilbåge som behöver pilar).
+Items låses upp i respektive by i anslutning till templet (krukmakere kring eldgrottan t.ex)
+Startbyn kanske är centrerad kring sista templet, men ej åtkomplig förrän alla 4 element är upplåsta, kanske även de sista två behöver besegras för att låsa upp bossrummet.
+
+Stamina och Spirit som liv/mana. Spirit låses upp när första elementet hittats. 
+Ökas efter varje boss, varannan resurs kanske? (+2 i resp efter alla 4 är besegrade).
+
+input-upsättning för en kontroll (uppsättning från switch/nintendo):
+  x
+y   a
+  b
+x: Item skill
+y: Element attack
+b: Normal attack / Interact
+a: Element skill
+
+Hold any element button to reset elements.
+
+
+  
+Elemental primary:
+Fire  -  Flame (damage and lights area)
+Wind  -  Push (enemies and push-blocks)
+Earth -  Weaken (poisons or makes certain enemies damagable)
+Water -  Shield (Block enemy attacks)
+
+Elemental secondary:
+Fire  -  Enhance (applies element damage to regular attack, increase damage)
+Wind  -  Dash (A dash movement with damage)
+Earth -  Sentry (stationary melee turret)
+Water -  Freeze/Slow 
